@@ -2,45 +2,9 @@
 #define BUFFERCALCBRAINSTORMING_H
 
 #include "access-strategies/singlethreadedaccessstrategy.h"
-
+#include "calc-composite/abstractcalculationcomponent.h"
 #include <memory>
 #include <vector>
-
-
-
-
-
-class AbstractCalculationComponent
-{
-public:
-    AbstractCalculationComponent(AbstractAccessStrategy::Ptr busyState);
-
-    virtual void init() {}
-    virtual void prepareCalc() {}
-    bool startCalc(int subBufferNo)
-    {
-        bool calcDoneByMe = m_busyState->tryMakeBusy();
-        if(calcDoneByMe) {
-            doCalc(subBufferNo);
-            m_busyState->setDone(true);
-        }
-        return calcDoneByMe;
-    }
-    bool calcDone()
-    {
-        return m_busyState->isDone();
-    }
-    void setDone(bool done) {
-        m_busyState->setDone(done);
-    }
-    virtual void destroy() {}
-protected:
-    virtual bool doCalc(int subBufferNo) = 0;
-
-    AbstractAccessStrategy::Ptr m_busyState;
-};
-
-typedef std::shared_ptr<AbstractCalculationComponent> AbstractCalculationComponentPtr;
 
 
 

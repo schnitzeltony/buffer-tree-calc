@@ -17,11 +17,13 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 file(GLOB HEADERS
     *.h
     access-strategies/*.h
+    calc-composite/*.h
 )
 
 file(GLOB SOURCES
     *.cpp
     access-strategies/*.cpp
+    calc-composite/*.cpp
 )
 
 add_executable(magic-calc
