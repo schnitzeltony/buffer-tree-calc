@@ -8,7 +8,6 @@ AbstractCalculationComponent::AbstractCalculationComponent(AbstractAccessStrateg
 void AbstractCalculationComponent::prepareCalc()
 {
     m_busyState->reset();
-    doPrepareCalc();
 }
 
 bool AbstractCalculationComponent::startCalc(int subBufferNo)

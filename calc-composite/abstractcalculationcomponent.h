@@ -17,7 +17,6 @@ public:
     void setDone(bool done);
 protected:
     virtual bool doCalc(int subBufferNo) = 0;
-    virtual void doPrepareCalc() {}
     AbstractAccessStrategy::Ptr m_busyState;
 };
 
