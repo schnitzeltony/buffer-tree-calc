@@ -10,7 +10,7 @@ void AbstractCalculationComponent::prepareCalc()
     m_busyState->reset();
 }
 
-bool AbstractCalculationComponent::startCalc(int subBufferNo)
+bool AbstractCalculationComponent::tryStartCalc(int subBufferNo)
 {
     bool calcDoneByMe = m_busyState->tryMakeBusy();
     if(calcDoneByMe) {

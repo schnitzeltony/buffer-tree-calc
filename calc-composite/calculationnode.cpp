@@ -1,40 +1,46 @@
 #include "calculationnode.h"
 
+CalculationNode::CalculationNode(AbstractAccessStrategy::Ptr busyState, ICalcNodeComponents::Ptr calcComponents) :
+    AbstractCalculationComponent(busyState),
+    m_calcComponents(calcComponents)
+{
+}
+
 bool CalculationNode::doCalc(int subBufferNo)
 {
     bool allWorkDone = true;
-    for(auto input : m_outCalcStrategy->getInputComponents()) {
+    for(auto input : m_calcComponents->getInputComponents()) {
         if(!input->calcDone()) {
-            bool started = input->startCalc(subBufferNo);
+            bool started = input->tryStartCalc(subBufferNo);
             if(!started) {
                 allWorkDone = false;
             }
         }
     }
-    if(allWorkDone && !m_outCalcStrategy->calcDone()) {
-        bool started = m_outCalcStrategy->startCalc(subBufferNo);
+    if(allWorkDone && !m_calcComponents->getOutputComponent()->calcDone()) {
+        bool started = m_calcComponents->getOutputComponent()->tryStartCalc(subBufferNo);
         if(!started) {
             allWorkDone = false;
         }
     }
     if(allWorkDone) {
-        m_outCalcStrategy->setDone(true);
+        m_calcComponents->getOutputComponent()->setDone(true);
     }
     return allWorkDone;
 }
 
 void CalculationNode::init()
 {
-    for(auto input : m_outCalcStrategy->getInputComponents()) {
+    for(auto input : m_calcComponents->getInputComponents()) {
         input->init();
     }
-    m_outCalcStrategy->getOutputBuffer()->init();
+    m_calcComponents->getOutputComponent()->init();
 }
 
 void CalculationNode::destroy()
 {
-    for(auto input : m_outCalcStrategy->getInputComponents()) {
+    for(auto input : m_calcComponents->getInputComponents()) {
         input->destroy();
     }
-    m_outCalcStrategy->getOutputBuffer()->destroy();
+    m_calcComponents->getOutputComponent()->destroy();
 }

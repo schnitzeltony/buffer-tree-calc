@@ -12,7 +12,7 @@ public:
     virtual void destroy() {}
 
     void prepareCalc();
-    bool startCalc(int subBufferNo);
+    bool tryStartCalc(int subBufferNo);
     bool calcDone();
     void setDone(bool done);
 protected:

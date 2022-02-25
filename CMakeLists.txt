@@ -18,14 +18,14 @@ file(GLOB HEADERS
     *.h
     access-strategies/*.h
     calc-composite/*.h
-    calc-strategies/*.h
+    calc-composite/components/*.h
 )
 
 file(GLOB SOURCES
     *.cpp
     access-strategies/*.cpp
     calc-composite/*.cpp
-    calc-strategies/*.cpp
+    calc-composite/components/*.cpp
 )
 
 add_executable(magic-calc
