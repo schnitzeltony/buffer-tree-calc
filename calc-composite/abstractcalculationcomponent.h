@@ -6,6 +6,7 @@
 class AbstractCalculationComponent
 {
 public:
+    typedef std::shared_ptr<AbstractCalculationComponent> Ptr;
     AbstractCalculationComponent(AbstractAccessStrategy::Ptr busyState);
 
     virtual void init() {}
@@ -20,7 +21,6 @@ protected:
     AbstractAccessStrategy::Ptr m_busyState;
 };
 
-typedef std::shared_ptr<AbstractCalculationComponent> AbstractCalculationComponentPtr;
 
 
 #endif // ABSTRACTCALCULATIONCOMPONENT_H
