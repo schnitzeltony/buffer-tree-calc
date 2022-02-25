@@ -24,8 +24,8 @@ bool CalculationComposite::doCalc(int subBufferNo)
         }
     }
     if(allWorkDone && !m_outputComponent->calcDone()) {
-        // Not starting final calc means another thread is here already
-        // so we can report allWorkDone to avoid threads looping without
+        // Not starting final calc means another thread is here already.
+        // So we can report allWorkDone to avoid threads looping without
         // calc activity
         bool started = m_outputComponent->tryStartCalc(subBufferNo);
         if(started) {

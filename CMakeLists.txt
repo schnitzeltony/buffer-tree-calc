@@ -23,7 +23,11 @@ file(GLOB SOURCES
     calc-composite/leaf-components/*.cpp
 )
 
+find_package (Threads)
+
 add_executable(magic-calc
     ${HEADERS}
     ${SOURCES}
 )
+
+target_link_libraries (magic-calc ${CMAKE_THREAD_LIBS_INIT})
