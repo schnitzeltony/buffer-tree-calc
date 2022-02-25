@@ -1,48 +1,13 @@
 #ifndef BUFFERCALCBRAINSTORMING_H
 #define BUFFERCALCBRAINSTORMING_H
 
+#include "access-strategies/singlethreadedaccessstrategy.h"
+
 #include <memory>
 #include <vector>
 
-class AbstractAccessStrategy
-{
-public:
-    typedef std::shared_ptr<AbstractAccessStrategy> Ptr;
-    virtual bool tryMakeBusy() = 0;
-    virtual void setDone(bool done) = 0;
-    virtual bool isDone() = 0;
-    virtual void reset() = 0;
-};
 
-class SingleThreadedBusyController : public AbstractAccessStrategy
-{
-public:
-    virtual bool tryMakeBusy() override
-    {
-        if(m_busy) {
-            return false;
-        }
-        m_busy = true;
-        return true;
-    }
-    virtual void setDone(bool done) override
-    {
-        m_done = done;
-    }
-    virtual bool isDone() override
-    {
-        return m_done;
-    }
-    virtual void reset() override
-    {
-        m_busy = false;
-        m_done = false;
-    }
 
-protected:
-    bool m_busy = false;
-    bool m_done = false;
-};
 
 
 class AbstractCalculationComponent
@@ -98,23 +63,40 @@ class ConreteBufferFloatVector: public AbstractCalculationBuffer
 public:
     std::vector<float> &getBuffer();
 };
+typedef std::shared_ptr<ConreteBufferFloatVector> ConreteBufferFloatVectorPtr;
+
 
 
 class AbstractCalculationStrategy : public AbstractCalculationComponent
 {
 public:
-    AbstractCalculationStrategy(std::vector<AbstractCalculationComponentPtr> inputComponents,
-                                AbstractCalculationComponentPtr outComponent);
+    AbstractCalculationStrategy(std::vector<AbstractCalculationComponent*> inputComponents,
+                                AbstractCalculationComponent* outComponent);
 
-    virtual std::vector<AbstractCalculationComponentPtr> getInputComponents();
-    virtual AbstractCalculationComponentPtr getOutputBuffer();
+    virtual std::vector<AbstractCalculationComponent*> getInputComponents();
+    virtual AbstractCalculationComponent* getOutputBuffer();
 
 private:
-    std::vector<AbstractCalculationComponentPtr> m_inputComponents;
-    AbstractCalculationComponentPtr m_outComponent;
+    std::vector<AbstractCalculationComponent*> m_inputComponents;
+    AbstractCalculationComponent *m_outComponent;
 };
 
 typedef std::shared_ptr<AbstractCalculationStrategy> AbstractCalculationStrategyPtr;
+
+
+class FftStrategyFloat : AbstractCalculationStrategy
+{
+public:
+    FftStrategyFloat(ConreteBufferFloatVectorPtr input, ConreteBufferFloatVectorPtr output) :
+        AbstractCalculationStrategy(std::vector<AbstractCalculationComponent*> {input.get()}, output.get()),
+        m_input(input),
+        m_output(output)
+    {
+    }
+private:
+    ConreteBufferFloatVectorPtr m_input;
+    ConreteBufferFloatVectorPtr m_output;
+};
 
 
 class CalculationNode: public AbstractCalculationComponent

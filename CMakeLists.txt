@@ -14,9 +14,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
+file(GLOB HEADERS
+    *.h
+    access-strategies/*.h
+)
+
+file(GLOB SOURCES
+    *.cpp
+    access-strategies/*.cpp
+)
+
 add_executable(magic-calc
-    main.cpp
-    buffercalcbrainstorming.h
-    buffercalcbrainstorming.cpp
+    ${HEADERS}
+    ${SOURCES}
 )
 target_link_libraries(magic-calc Qt${QT_VERSION_MAJOR}::Core)
