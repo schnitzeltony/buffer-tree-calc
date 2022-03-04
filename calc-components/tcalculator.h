@@ -10,7 +10,9 @@ template <class INTYPE, class OUTTYPE>
 class TCalculator : public AbstractCalculationComponent
 {
 public:
-    TCalculator(std::vector<CALC_PTR(INTYPE, OUTTYPE)> inputCalculators, BUFFER_PTR(OUTTYPE) outputBuffer, AbstractAccessStrategy::Ptr accessStrategy) :
+    TCalculator(std::vector<CALC_PTR(INTYPE, OUTTYPE)> inputCalculators,
+                BUFFER_PTR(OUTTYPE) outputBuffer,
+                AbstractAccessStrategy::Ptr accessStrategy) :
         AbstractCalculationComponent(accessStrategy),
         m_inputCalculators(inputCalculators),
         m_outputBuffer(outputBuffer)
@@ -19,6 +21,7 @@ public:
     virtual bool doCalc(int sampleCount) override;
     virtual void init() final;
     virtual void destroy() final;
+    BUFFER_PTR(OUTTYPE) getOutputBuffer() { return m_outputBuffer; }
 protected:
     virtual void doInit() {}
     virtual void doDestroy() {}

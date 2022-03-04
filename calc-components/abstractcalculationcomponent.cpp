@@ -1,7 +1,7 @@
 #include "abstractcalculationcomponent.h"
 
-AbstractCalculationComponent::AbstractCalculationComponent(AbstractAccessStrategy::Ptr busyState) :
-    m_accessStrategy(busyState)
+AbstractCalculationComponent::AbstractCalculationComponent(AbstractAccessStrategy::Ptr accessStrategy) :
+    m_accessStrategy(accessStrategy)
 {
 }
 
