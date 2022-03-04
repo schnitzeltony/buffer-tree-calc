@@ -9,7 +9,7 @@ CalculatorFftFloat::CalculatorFftFloat(AbstractAccessStrategy::Ptr accessStrateg
 
 bool CalculatorFftFloat::doCalc(int sampleCount)
 {
-
+    return true;
 }
 
 void CalculatorFftFloat::doInit()

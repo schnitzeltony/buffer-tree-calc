@@ -11,19 +11,18 @@ class TCalcContainer : public AbstractCalculationComponent
 {
 public:
     TCalcContainer(std::vector<CALC_PTR(INTYPE, OUTTYPE)> inputCalculators,
-                BUFFER_PTR(OUTTYPE) outputBuffer,
-                AbstractAccessStrategy::Ptr accessStrategy) :
+                   BUFFER_PTR(OUTTYPE) outputBuffer,
+                   AbstractAccessStrategy::Ptr accessStrategy) :
         AbstractCalculationComponent(accessStrategy),
         m_inputCalculators(inputCalculators),
         m_outputBuffer(outputBuffer) { }
-    virtual bool doCalc(int sampleCount) override;
-    virtual void init() final;
-    virtual void destroy() final;
+    virtual void init() override final;
+    virtual void destroy() override final;
     BUFFER_PTR(OUTTYPE) getOutputBuffer() { return m_outputBuffer; }
 private:
     virtual void doInit() { }
     virtual void doDestroy() { }
-
+    virtual bool doCalc(int sampleCount) override;// final;
     bool calcInputs(int sampleCount);
     std::vector<CALC_PTR(INTYPE, OUTTYPE)> m_inputCalculators;
     BUFFER_PTR(OUTTYPE) m_outputBuffer;
