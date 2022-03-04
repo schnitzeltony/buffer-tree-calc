@@ -2,9 +2,9 @@
 #define CALCULATORFFTFLOAT_H
 
 #include "buffers/buffertemplate.h"
-#include "calc-components/tcalculator.h"
+#include "calc-components/tcalccontainer.h"
 
-class CalculatorFftFloat : public TCalculator<float, float>
+class CalculatorFftFloat : public TCalcContainer<float, float>
 {
 public:
     CalculatorFftFloat(AbstractAccessStrategy::Ptr accessStrategy,

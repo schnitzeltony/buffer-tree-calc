@@ -1,32 +1,35 @@
-#ifndef TCALCULATOR_H
-#define TCALCULATOR_H
+#ifndef TCALCCONTAINER_H
+#define TCALCCONTAINER_H
 
 #include "calc-components/abstractcalculationcomponent.h"
 #include "buffers/buffertemplate.h"
 
-#define CALC_PTR(INTYPE, OUTTYPE) std::shared_ptr<TCalculator<INTYPE, OUTTYPE>>
+#define CALC_PTR(INTYPE, OUTTYPE) std::shared_ptr<TCalcContainer<INTYPE, OUTTYPE>>
 
 template <class INTYPE, class OUTTYPE>
-class TCalculator : public AbstractCalculationComponent
+class TCalcContainer : public AbstractCalculationComponent
 {
 public:
-    TCalculator(std::vector<CALC_PTR(INTYPE, OUTTYPE)> inputCalculators,
+    TCalcContainer(std::vector<CALC_PTR(INTYPE, OUTTYPE)> inputCalculators,
                 BUFFER_PTR(OUTTYPE) outputBuffer,
                 AbstractAccessStrategy::Ptr accessStrategy) :
         AbstractCalculationComponent(accessStrategy),
         m_inputCalculators(inputCalculators),
-        m_outputBuffer(outputBuffer)
-    {
-    }
+        m_outputBuffer(outputBuffer) { }
     virtual bool doCalc(int sampleCount) override;
     virtual void init() final;
     virtual void destroy() final;
     BUFFER_PTR(OUTTYPE) getOutputBuffer() { return m_outputBuffer; }
-protected:
-    virtual void doInit() {}
-    virtual void doDestroy() {}
+private:
+    virtual void doInit() { }
+    virtual void doDestroy() { }
+
+    bool calcInputs(int sampleCount);
     std::vector<CALC_PTR(INTYPE, OUTTYPE)> m_inputCalculators;
     BUFFER_PTR(OUTTYPE) m_outputBuffer;
 };
 
-#endif // TCALCULATOR_H
+#include "tcalccontainerimplement.h"
+
+
+#endif // TCALCCONTAINER_H

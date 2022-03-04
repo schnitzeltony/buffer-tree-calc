@@ -3,7 +3,7 @@
 CalculatorFftFloat::CalculatorFftFloat(AbstractAccessStrategy::Ptr accessStrategy,
                                    CALC_PTR(float, float) input,
                                    BUFFER_PTR(float) output) :
-    TCalculator<float, float>({input}, output, accessStrategy)
+    TCalcContainer<float, float>({input}, output, accessStrategy)
 {
 }
 

@@ -5,12 +5,8 @@
 #include "calc-components/calculators/nullcomponent.h"
 #include "calc-components/calculators/calculatorfftfloat.h"
 
-int main(int argc, char *argv[])
+int main()
 {
-    (void)argc;
-    (void)argv;
-
-
     BUFFER_PTR(float) setPoints = std::make_shared<BufferTemplate<float>>(1024);
     CALC_PTR(float, float) nullSetPointCalc =
             std::make_shared<NullComponent<float>>(createAccessStrategy<SingleThreadedAccessStrategy>(), setPoints);
@@ -22,6 +18,11 @@ int main(int argc, char *argv[])
     BUFFER_PTR(float) actualFFt = std::make_shared<BufferTemplate<float>>(1024);
     AbstractAccessStrategy::Ptr fftCalcAccess = std::make_shared<SingleThreadedAccessStrategy>();
     CalculatorFftFloat fftCalc(fftCalcAccess, nullActualInput, actualFFt);
+
+    fftCalc.init();
+
+    fftCalc.prepareCalc();
+    fftCalc.tryStartCalc(5);
 
 
 

@@ -3,7 +3,7 @@
 ConvertInt16ToFloat::ConvertInt16ToFloat(AbstractAccessStrategy::Ptr accessStrategy,
                                          CALC_PTR(int16_t, float) input,
                                          BUFFER_PTR(float) output) :
-    TCalculator<int16_t, float>({input}, output, accessStrategy)
+    TCalcContainer<int16_t, float>({input}, output, accessStrategy)
 {
 }
 
