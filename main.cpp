@@ -1,6 +1,5 @@
 #include "buffers/buffertemplate.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
-#include "calc-components/calculators/sampletofftfloat.h"
 #include "calc-components/calculators/convertfloattoint16.h"
 
 #include "calc-components/calculators/nullcomponent.h"

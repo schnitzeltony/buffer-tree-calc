@@ -17,8 +17,8 @@ public:
     {
     }
     virtual bool doCalc(int sampleCount) override;
-    virtual void init() override;
-    virtual void destroy() override;
+    virtual void init() final;
+    virtual void destroy() final;
 protected:
     virtual void doInit() {}
     virtual void doDestroy() {}
