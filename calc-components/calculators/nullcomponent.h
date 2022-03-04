@@ -2,23 +2,17 @@
 #define NULLCOMPONENT_H
 
 #include "buffers/buffertemplate.h"
-#include "calc-components/abstractcalculationcomponent.h"
+#include "calc-components/tcalculator.h"
 
-template <class T>
-class NullComponent : public AbstractCalculationComponent
+template <class OUTTYPE>
+class NullComponent : public TCalculator<OUTTYPE, OUTTYPE>
 {
 public:
-    NullComponent(BUFFER_PTR(T) inputOutput) :
-        AbstractCalculationComponent(AbstractAccessStrategy::Ptr())
-    {
-        (void)inputOutput;
-    }
-protected:
-    virtual bool doCalc(int sampleCount)
-    {
-        (void) sampleCount;
-        return true;
-    }
+    NullComponent(AbstractAccessStrategy::Ptr accessStrategy,
+                  BUFFER_PTR(OUTTYPE) output) :
+        TCalculator<OUTTYPE, OUTTYPE>({}, output, accessStrategy)
+    {}
+    virtual bool doCalc(int sampleCount) override { (void)sampleCount; return true; };
 };
 
 #endif // NULLCOMPONENT_H
