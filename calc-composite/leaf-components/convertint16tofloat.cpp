@@ -1,15 +1,27 @@
 #include "convertint16tofloat.h"
 
-ConvertInt16ToBareFloat::ConvertInt16ToBareFloat(AbstractAccessStrategy::Ptr accessStrategy,
-                                                 std::shared_ptr<BufferTemplate<int16_t> > input,
-                                                 std::shared_ptr<BufferTemplate<float> > output) :
-    AbstractCalculationComponent(accessStrategy),
-    m_input(input),
-    m_output(output)
+ConvertInt16ToFloat::ConvertInt16ToFloat(AbstractAccessStrategy::Ptr accessStrategy,
+                                         CALC_PTR(int16_t, float) input,
+                                         BUFFER_PTR(float) output) :
+    TCalculator<int16_t, float>({input}, output, accessStrategy)
 {
 }
 
-bool ConvertInt16ToBareFloat::doCalc(int sampleCount)
+bool ConvertInt16ToFloat::doCalc(int sampleCount)
 {
+    return true;
+}
 
+
+
+ConvertFloatToInt16::ConvertFloatToInt16(AbstractAccessStrategy::Ptr accessStrategy,
+                                         CALC_PTR(float, int16_t) input,
+                                         BUFFER_PTR(int16_t) output) :
+    TCalculator<float, int16_t>({input}, output, accessStrategy)
+{
+}
+
+bool ConvertFloatToInt16::doCalc(int sampleCount)
+{
+    return true;
 }
