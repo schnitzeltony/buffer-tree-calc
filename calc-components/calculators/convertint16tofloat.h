@@ -3,6 +3,7 @@
 
 #include "calc-components/abstractcalculationcomponent.h"
 #include "buffers/buffertemplate.h"
+#include "calc-components/tcalculator.h"
 
 class ConvertInt16ToFloat : public TCalculator<int16_t, float>
 {

@@ -1,5 +1,4 @@
-#include "buffertemplate.h"
-
+#include "tcalculator.h"
 
 template <class INTYPE, class OUTTYPE>
 bool TCalculator<INTYPE, OUTTYPE>::doCalc(int sampleCount)
