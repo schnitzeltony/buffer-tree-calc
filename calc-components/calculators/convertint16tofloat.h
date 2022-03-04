@@ -1,7 +1,7 @@
 #ifndef CONVERTINT16TOFLOAT_H
 #define CONVERTINT16TOFLOAT_H
 
-#include "calc-composite/abstractcalculationcomponent.h"
+#include "calc-components/abstractcalculationcomponent.h"
 #include "buffers/buffertemplate.h"
 
 class ConvertInt16ToFloat : public TCalculator<int16_t, float>

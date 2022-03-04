@@ -11,16 +11,16 @@ file(GLOB HEADERS
     *.h
     access-strategies/*.h
     buffers/*.h
-    calc-composite/*.h
-    calc-composite/leaf-components/*.h
+    calc-components/*.h
+    calc-components/calculators/*.h
 )
 
 file(GLOB SOURCES
     *.cpp
     access-strategies/*.cpp
     buffers/*.cpp
-    calc-composite/*.cpp
-    calc-composite/leaf-components/*.cpp
+    calc-components/*.cpp
+    calc-components/calculators/*.cpp
 )
 
 find_package (Threads)

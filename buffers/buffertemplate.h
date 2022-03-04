@@ -1,7 +1,7 @@
 #ifndef BUFFERTEMPLATE_H
 #define BUFFERTEMPLATE_H
 
-#include "calc-composite/abstractcalculationcomponent.h"
+#include "calc-components/abstractcalculationcomponent.h"
 
 #include <memory>
 #include <cstddef>

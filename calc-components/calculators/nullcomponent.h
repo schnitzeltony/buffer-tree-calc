@@ -2,7 +2,7 @@
 #define NULLCOMPONENT_H
 
 #include "buffers/buffertemplate.h"
-#include "calc-composite/abstractcalculationcomponent.h"
+#include "calc-components/abstractcalculationcomponent.h"
 
 template <class T>
 class NullComponent : public AbstractCalculationComponent

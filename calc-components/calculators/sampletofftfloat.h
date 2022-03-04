@@ -1,7 +1,7 @@
 #ifndef SAMPLETOFFTFLOAT_H
 #define SAMPLETOFFTFLOAT_H
 
-#include "calc-composite/abstractcalculationcomponent.h"
+#include "calc-components/abstractcalculationcomponent.h"
 #include "buffers/buffertemplate.h"
 
 class SampleToFftFloat : public AbstractCalculationComponent

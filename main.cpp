@@ -1,10 +1,9 @@
 #include "buffers/buffertemplate.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
-#include "calc-composite/calculationcomposite.h"
-#include "calc-composite/leaf-components/sampletofftfloat.h"
-#include "calc-composite/leaf-components/convertint16tofloat.h"
+#include "calc-components/calculators/sampletofftfloat.h"
+#include "calc-components/calculators/convertint16tofloat.h"
 
-#include "calc-composite/leaf-components/nullcomponent.h"
+#include "calc-components/calculators/nullcomponent.h"
 
 int main(int argc, char *argv[])
 {
