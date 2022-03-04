@@ -5,7 +5,7 @@
 #include "calc-composite/leaf-components/sampletofftfloat.h"
 
 
-/*int main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
@@ -21,9 +21,9 @@
                                                                                        outFloatFft);
 
     return 0;
-}*/
+}
 
-#include <iostream>
+/*#include <iostream>
 #include <thread>
 #include <chrono>
 
@@ -70,3 +70,4 @@ int main()
     time_span = duration_cast<duration<double>>(startedbar - start);
     std::cout << "It took " << time_span.count() << " seconds to start bar.\n";
 }
+*/
