@@ -13,4 +13,7 @@ public:
     virtual void reset() = 0;
 };
 
+template <typename T>
+std::shared_ptr<T> createAccessStrategy() { return std::make_shared<T>(); }
+
 #endif // ABSTRACTACCESSSTRATEGY_H

@@ -1,13 +1,28 @@
 #include "buffers/buffertemplate.h"
+#include "access-strategies/abstractaccessstrategy.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
 #include "calc-components/calculators/convertfloattoint16.h"
-
 #include "calc-components/calculators/nullcomponent.h"
+#include "calc-components/calculators/calculatorfftfloat.h"
 
 int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
+
+
+    BUFFER_PTR(float) setPoints = std::make_shared<BufferTemplate<float>>(1024);
+    CALC_PTR(float, float) nullSetPointCalc =
+            std::make_shared<NullComponent<float>>(createAccessStrategy<SingleThreadedAccessStrategy>(), setPoints);
+
+    BUFFER_PTR(float) actualInput = std::make_shared<BufferTemplate<float>>(1024);
+    CALC_PTR(float, float) nullActualInput =
+            std::make_shared<NullComponent<float>>(createAccessStrategy<SingleThreadedAccessStrategy>(), actualInput);
+
+    BUFFER_PTR(float) actualFFt = std::make_shared<BufferTemplate<float>>(1024);
+    AbstractAccessStrategy::Ptr fftCalcAccess = std::make_shared<SingleThreadedAccessStrategy>();
+    CalculatorFftFloat fftCalc(fftCalcAccess, nullActualInput, actualFFt);
+
 
 
     BUFFER_PTR(int16_t) regulatorOut = std::make_shared<BufferTemplate<int16_t>>(1024);
@@ -21,14 +36,6 @@ int main(int argc, char *argv[])
 
     BUFFER_PTR(float) outFloatFft = std::make_shared<BufferTemplate<float>>(1024);
 
-
-    /*AbstractAccessStrategy::Ptr sampleToFftAccess = std::make_shared<SingleThreadedAccessStrategy>();
-    AbstractCalculationComponent::Ptr sampleToFft = std::make_shared<SampleToFftFloat>(sampleToFftAccess,
-                                                                                       inFloatSamples,
-                                                                                       outFloatFft);
-
-    BUFFER_PTR(int16_t) testBuffer = std::make_shared<BufferTemplate<int16_t>>(10);
-    NullComponent<int16_t> test(testBuffer);*/
 
     return 0;
 }
