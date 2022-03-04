@@ -9,14 +9,14 @@ CalculationComposite::CalculationComposite(AbstractAccessStrategy::Ptr busyState
 {
 }
 
-bool CalculationComposite::doCalc(int subBufferNo)
+bool CalculationComposite::doCalc(int sampleCount)
 {
     bool allWorkDone = true;
     for(auto input : m_inputComponents) {
         if(!input->calcDone()) {
-            bool started = input->tryStartCalc(subBufferNo);
+            bool started = input->tryStartCalc(sampleCount);
             if(started) {
-                input->setDone(true);
+                input->setDone();
             }
             else {
                 allWorkDone = false;
@@ -27,9 +27,9 @@ bool CalculationComposite::doCalc(int subBufferNo)
         // Not starting final calc means another thread is here already.
         // So we can report allWorkDone to avoid threads looping without
         // calc activity
-        bool started = m_outputComponent->tryStartCalc(subBufferNo);
+        bool started = m_outputComponent->tryStartCalc(sampleCount);
         if(started) {
-            m_outputComponent->setDone(true);
+            m_outputComponent->setDone();
         }
     }
     return allWorkDone;

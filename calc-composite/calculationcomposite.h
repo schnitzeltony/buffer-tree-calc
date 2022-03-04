@@ -10,7 +10,7 @@ public:
     CalculationComposite(AbstractAccessStrategy::Ptr busyState,
                     std::vector<AbstractCalculationComponent::Ptr> inputComponents,
                     AbstractCalculationComponent::Ptr outputComponent);
-    virtual bool doCalc(int subBufferNo) override;
+    virtual bool doCalc(int sampleCount) override;
     virtual void init() override;
     virtual void destroy() override;
 private:

@@ -8,7 +8,7 @@ class AbstractAccessStrategy
 public:
     typedef std::shared_ptr<AbstractAccessStrategy> Ptr;
     virtual bool tryMakeBusy() = 0;
-    virtual void setDone(bool done) = 0;
+    virtual void setDone() = 0;
     virtual bool isDone() = 0;
     virtual void reset() = 0;
 };

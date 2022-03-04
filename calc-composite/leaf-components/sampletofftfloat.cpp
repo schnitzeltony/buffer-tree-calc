@@ -19,7 +19,7 @@ void SampleToFftFloat::destroy()
 
 }
 
-bool SampleToFftFloat::doCalc(int subBufferNo)
+bool SampleToFftFloat::doCalc(int sampleCount)
 {
 
 }

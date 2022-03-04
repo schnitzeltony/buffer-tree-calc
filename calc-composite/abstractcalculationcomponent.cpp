@@ -10,12 +10,12 @@ void AbstractCalculationComponent::prepareCalc()
     m_accessStrategy->reset();
 }
 
-bool AbstractCalculationComponent::tryStartCalc(int subBufferNo)
+bool AbstractCalculationComponent::tryStartCalc(int sampleCount)
 {
     bool calcDoneByMe = m_accessStrategy->tryMakeBusy();
     if(calcDoneByMe) {
-        doCalc(subBufferNo);
-        m_accessStrategy->setDone(true);
+        doCalc(sampleCount);
+        m_accessStrategy->setDone();
     }
     return calcDoneByMe;
 }
@@ -25,7 +25,7 @@ bool AbstractCalculationComponent::calcDone()
     return m_accessStrategy->isDone();
 }
 
-void AbstractCalculationComponent::setDone(bool done)
+void AbstractCalculationComponent::setDone()
 {
-    m_accessStrategy->setDone(done);
+    m_accessStrategy->setDone();
 }

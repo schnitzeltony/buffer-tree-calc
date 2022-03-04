@@ -9,9 +9,9 @@ bool SingleThreadedAccessStrategy::tryMakeBusy()
     return true;
 }
 
-void SingleThreadedAccessStrategy::setDone(bool done)
+void SingleThreadedAccessStrategy::setDone()
 {
-    m_done = done;
+    m_done = true;
 }
 
 bool SingleThreadedAccessStrategy::isDone()

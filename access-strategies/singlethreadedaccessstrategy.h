@@ -7,7 +7,7 @@ class SingleThreadedAccessStrategy : public AbstractAccessStrategy
 {
 public:
     virtual bool tryMakeBusy() override;
-    virtual void setDone(bool done) override;
+    virtual void setDone() override;
     virtual bool isDone() override;
     virtual void reset() override;
 protected:

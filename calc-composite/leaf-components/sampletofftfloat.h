@@ -12,7 +12,7 @@ public:
                      BufferBareFloat::Ptr output);
     virtual void init() override;
     virtual void destroy() override;
-    virtual bool doCalc(int subBufferNo) override;
+    virtual bool doCalc(int sampleCount) override;
 private:
     BufferBareFloat::Ptr m_input;
     BufferBareFloat::Ptr m_output;

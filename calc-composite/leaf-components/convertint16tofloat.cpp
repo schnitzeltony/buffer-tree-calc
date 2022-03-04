@@ -9,7 +9,7 @@ ConvertInt16ToBareFloat::ConvertInt16ToBareFloat(AbstractAccessStrategy::Ptr acc
 {
 }
 
-bool ConvertInt16ToBareFloat::doCalc(int subBufferNo)
+bool ConvertInt16ToBareFloat::doCalc(int sampleCount)
 {
 
 }

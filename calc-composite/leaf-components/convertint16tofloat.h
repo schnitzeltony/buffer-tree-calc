@@ -11,7 +11,7 @@ public:
     ConvertInt16ToBareFloat(AbstractAccessStrategy::Ptr accessStrategy,
                             BufferVectorInt16Ptr input,
                             BufferBareFloat::Ptr output);
-    virtual bool doCalc(int subBufferNo) override;
+    virtual bool doCalc(int sampleCount) override;
 private:
     BufferVectorInt16Ptr m_input;
     BufferBareFloat::Ptr m_output;

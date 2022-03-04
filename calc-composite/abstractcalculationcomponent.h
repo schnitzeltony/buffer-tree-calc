@@ -13,11 +13,11 @@ public:
     virtual void destroy() {}
 
     void prepareCalc();
-    bool tryStartCalc(int subBufferNo);
+    bool tryStartCalc(int sampleCount);
     bool calcDone();
-    void setDone(bool done);
+    void setDone();
 protected:
-    virtual bool doCalc(int subBufferNo) = 0;
+    virtual bool doCalc(int sampleCount) = 0;
     AbstractAccessStrategy::Ptr m_accessStrategy;
 };
 
