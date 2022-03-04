@@ -9,9 +9,9 @@ template <class T, class Allocator = std::allocator<T>>
 class BufferTemplate
 {
 public:
-    BufferTemplate(std::size_t size, const Allocator& alloc = Allocator())
+    BufferTemplate(std::size_t size, const Allocator& alloc = Allocator()) :
+        m_buffer(size, alloc)
     {
-
     };
 
 private:
