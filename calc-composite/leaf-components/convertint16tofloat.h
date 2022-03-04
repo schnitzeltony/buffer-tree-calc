@@ -2,19 +2,18 @@
 #define CONVERTINT16TOFLOAT_H
 
 #include "calc-composite/abstractcalculationcomponent.h"
-#include "buffers/buffervectorint16.h"
-#include "buffers/bufferbarefloat.h"
+#include "buffers/buffertemplate.h"
 
 class ConvertInt16ToBareFloat : public AbstractCalculationComponent
 {
 public:
     ConvertInt16ToBareFloat(AbstractAccessStrategy::Ptr accessStrategy,
-                            BufferVectorInt16Ptr input,
-                            BufferBareFloat::Ptr output);
+                            BUFFER_PTR(int16_t) input,
+                            BUFFER_PTR(float) output);
     virtual bool doCalc(int sampleCount) override;
 private:
-    BufferVectorInt16Ptr m_input;
-    BufferBareFloat::Ptr m_output;
+    BUFFER_PTR(int16_t) m_input;
+    BUFFER_PTR(float) m_output;
 };
 
 #endif // CONVERTINT16TOFLOAT_H

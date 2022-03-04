@@ -1,8 +1,8 @@
 #include "sampletofftfloat.h"
 
 SampleToFftFloat::SampleToFftFloat(AbstractAccessStrategy::Ptr accessStrategy,
-                                   BufferBareFloat::Ptr input,
-                                   BufferBareFloat::Ptr output) :
+                                   BUFFER_PTR(float) input,
+                                   BUFFER_PTR(float) output) :
     AbstractCalculationComponent(accessStrategy),
     m_input(input),
     m_output(output)

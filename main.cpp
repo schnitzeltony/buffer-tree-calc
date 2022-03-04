@@ -1,24 +1,27 @@
-#include "buffers/bufferbarefloat.h"
-#include "buffers/buffervectorint16.h"
+#include "buffers/buffertemplate.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
 #include "calc-composite/calculationcomposite.h"
 #include "calc-composite/leaf-components/sampletofftfloat.h"
 
+#include "calc-composite/leaf-components/nullcomponent.h"
 
 int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
 
-    BufferBareFloat::Ptr inFloatSamples = std::make_shared<BufferBareFloat>(1024);
-    BufferBareFloat::Ptr outFloatFft = std::make_shared<BufferBareFloat>(1024);
+    BUFFER_PTR(float) inFloatSamples = std::make_shared<BufferTemplate<float>>(1024);
+    BUFFER_PTR(float) outFloatFft = std::make_shared<BufferTemplate<float>>(1024);
 
-    BufferVectorInt16Ptr outInt16Fft = std::make_shared<BufferVectorInt16>(1024);
+    BUFFER_PTR(int16_t) outInt16Fft = std::make_shared<BufferTemplate<int16_t>>(1024);
 
     AbstractAccessStrategy::Ptr sampleToFftAccess = std::make_shared<SingleThreadedAccessStrategy>();
     AbstractCalculationComponent::Ptr sampleToFft = std::make_shared<SampleToFftFloat>(sampleToFftAccess,
                                                                                        inFloatSamples,
                                                                                        outFloatFft);
+
+    BUFFER_PTR(int16_t) testBuffer = std::make_shared<BufferTemplate<int16_t>>(10);
+    NullComponent<int16_t> test(testBuffer);
 
     return 0;
 }

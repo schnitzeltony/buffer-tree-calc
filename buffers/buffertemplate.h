@@ -18,6 +18,6 @@ private:
     std::vector<T, Allocator> m_buffer;
 };
 
-#define BUFFER_PTR std::shared_ptr<BufferTemplate<T>>
+#define BUFFER_PTR(T) std::shared_ptr<BufferTemplate<T>>
 
 #endif // BUFFERTEMPLATE_H

@@ -2,20 +2,20 @@
 #define SAMPLETOFFTFLOAT_H
 
 #include "calc-composite/abstractcalculationcomponent.h"
-#include "buffers/bufferbarefloat.h"
+#include "buffers/buffertemplate.h"
 
 class SampleToFftFloat : public AbstractCalculationComponent
 {
 public:
     SampleToFftFloat(AbstractAccessStrategy::Ptr accessStrategy,
-                     BufferBareFloat::Ptr input,
-                     BufferBareFloat::Ptr output);
+                     BUFFER_PTR(float) input,
+                     BUFFER_PTR(float) output);
     virtual void init() override;
     virtual void destroy() override;
     virtual bool doCalc(int sampleCount) override;
 private:
-    BufferBareFloat::Ptr m_input;
-    BufferBareFloat::Ptr m_output;
+    BUFFER_PTR(float) m_input;
+    BUFFER_PTR(float) m_output;
 };
 
 #endif // SAMPLETOFFTFLOAT_H
