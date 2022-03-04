@@ -1,7 +1,8 @@
 #ifndef TCALCCONTAINER_H
 #define TCALCCONTAINER_H
 
-#include "calc-components/abstractcalculationcomponent.h"
+#include "abstractcalculationcomponent.h"
+#include "calccomposite.h"
 #include "buffers/buffertemplate.h"
 
 #define CALC_PTR(INTYPE, OUTTYPE) std::shared_ptr<TCalcContainer<INTYPE, OUTTYPE>>
