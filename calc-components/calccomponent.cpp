@@ -1,7 +1,8 @@
 #include "calccomponent.h"
 
-CalcComponent::CalcComponent(AbstractAccessStrategy::Ptr accessStrategy) :
-    m_accessStrategy(accessStrategy)
+CalcComponent::CalcComponent(std::function<bool (int)> doCalcHandler, AbstractAccessStrategy::Ptr accessStrategy) :
+    m_accessStrategy(accessStrategy),
+    m_doCalcHandler(doCalcHandler)
 {
 }
 
@@ -23,4 +24,9 @@ bool CalcComponent::tryStartCalc(int sampleCount)
 bool CalcComponent::isDone()
 {
     return m_accessStrategy->isDone();
+}
+
+bool CalcComponent::doCalc(int sampleCount)
+{
+    return m_doCalcHandler(sampleCount);
 }

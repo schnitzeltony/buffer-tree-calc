@@ -5,11 +5,6 @@ CalcComposite::CalcComposite(std::vector<Ptr> components) :
 {
 }
 
-std::vector<CalcInterface::Ptr> CalcComposite::getComponents()
-{
-    return m_components;
-}
-
 bool CalcComposite::doCalc(int sampleCount)
 {
     bool allDone = true;
