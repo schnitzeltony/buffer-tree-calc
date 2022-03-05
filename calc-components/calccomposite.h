@@ -17,7 +17,6 @@ public:
     virtual void setDone() override final;
 protected:
     virtual bool doCalc(int sampleCount) override final;
-
 private:
     std::vector<Ptr> m_components;
 };
