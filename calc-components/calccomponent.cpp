@@ -24,8 +24,3 @@ bool CalcComponent::isDone()
 {
     return m_accessStrategy->isDone();
 }
-
-void CalcComponent::setDone()
-{
-    m_accessStrategy->setDone();
-}

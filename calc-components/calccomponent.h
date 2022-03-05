@@ -14,7 +14,6 @@ public:
     virtual void prepareCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
     virtual bool isDone() override final;
-    virtual void setDone() override final;
 private:
     AbstractAccessStrategy::Ptr m_accessStrategy;
 };
