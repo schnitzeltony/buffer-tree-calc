@@ -1,11 +1,10 @@
 #ifndef CALCCOMPOSITE_H
 #define CALCCOMPOSITE_H
 
-#include "calcInterface.h"
-#include "abstractcalculationcomponent.h"
+#include "calcinterface.h"
 #include <vector>
 
-class CalcComposite : public CalcInteface
+class CalcComposite : public CalcInterface
 {
 public:
     CalcComposite(std::vector<Ptr> components);
@@ -20,7 +19,7 @@ protected:
     virtual bool doCalc(int sampleCount) override final;
 
 private:
-    std::vector<CalcInteface::Ptr> m_components;
+    std::vector<Ptr> m_components;
 };
 
 #endif // CALCCOMPOSITE_H

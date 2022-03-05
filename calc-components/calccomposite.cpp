@@ -1,6 +1,6 @@
 #include "calccomposite.h"
 
-CalcComposite::CalcComposite(std::vector<CalcComposite::Ptr> components) :
+CalcComposite::CalcComposite(std::vector<Ptr> components) :
     m_components(components)
 {
 }

@@ -3,11 +3,10 @@
 
 #include <memory>
 
-class CalcInteface
+class CalcInterface
 {
 public:
-    typedef std::shared_ptr<CalcInteface> Ptr;
-
+    typedef std::shared_ptr<CalcInterface> Ptr;
     virtual void init() = 0;
     virtual void destroy() = 0;
 
