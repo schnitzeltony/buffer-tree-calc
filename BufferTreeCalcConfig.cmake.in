@@ -1,0 +1,14 @@
+include(CMakeFindDependencyMacro)
+
+# Capturing values from configure (optional)
+#set(my-config-var @my-config-var@)
+
+# dependencies
+find_dependency(PkgConfig)
+find_dependency(Threads)
+
+# cmark pkg-config??
+
+# targets file
+include("${CMAKE_CURRENT_LIST_DIR}/BufferTreeCalcConfigTargets.cmake")
+
