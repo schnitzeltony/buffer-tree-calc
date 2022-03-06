@@ -100,6 +100,39 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/BufferTreeCalc
     )
 
+
+find_package(GTest)
+if(NOT CMAKE_CROSSCOMPILING AND ${GTest_FOUND})
+    message(STATUS "unittest ${PROJECT_NAME}")
+    enable_testing()
+
+    add_test(NAME    ${PROJECT_NAME}-unittest
+             COMMAND ${PROJECT_NAME}-unittest)
+
+    file(GLOB UNITTESTS
+        tests/*.cpp
+    )
+
+    add_executable(${PROJECT_NAME}-unittest
+        ${UNITTESTS}
+    )
+
+    target_include_directories(${PROJECT_NAME}-unittest
+        PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        )
+
+    target_link_libraries(${PROJECT_NAME}-unittest
+        PUBLIC
+        gtest
+        gtest_main
+        ${PROJECT_NAME}
+    )
+
+endif()
+
+
 # spawn out some info on configuration
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

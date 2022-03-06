@@ -15,6 +15,9 @@ public:
         m_buffer(size, alloc)
     {
     };
+    T& at(std::size_t pos) { return m_buffer.at(pos); }
+    T* data() { return m_buffer.data(); }
+    std::size_t size() { return m_buffer.size(); }
 
 private:
     std::vector<T, Allocator> m_buffer;
