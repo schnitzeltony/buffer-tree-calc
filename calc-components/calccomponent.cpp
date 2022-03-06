@@ -1,6 +1,6 @@
 #include "calccomponent.h"
 
-CalcComponent::CalcComponent(std::function<bool (int)> doCalcHandler, AbstractAccessStrategy::Ptr accessStrategy) :
+CalcComponent::CalcComponent(std::function<void (int)> doCalcHandler, AbstractAccessStrategy::Ptr accessStrategy) :
     m_accessStrategy(accessStrategy),
     m_doCalcHandler(doCalcHandler)
 {

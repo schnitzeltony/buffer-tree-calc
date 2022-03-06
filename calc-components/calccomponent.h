@@ -8,7 +8,7 @@
 class CalcComponent : public CalcInterface
 {
 public:
-    CalcComponent(std::function<bool(int)> doCalcHandler, AbstractAccessStrategy::Ptr accessStrategy);
+    CalcComponent(std::function<void(int)> doCalcHandler, AbstractAccessStrategy::Ptr accessStrategy);
     virtual void init() override { }
     virtual void destroy() override { }
 
@@ -19,7 +19,7 @@ protected:
     virtual void doCalc(int sampleCount) override final;
 private:
     AbstractAccessStrategy::Ptr m_accessStrategy;
-    std::function<bool(int)> m_doCalcHandler = nullptr;
+    std::function<void(int)> m_doCalcHandler = nullptr;
 };
 
 #endif // CALCNODE_H
