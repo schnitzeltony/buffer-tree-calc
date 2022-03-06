@@ -1,13 +1,12 @@
 #include "convertfloattoint16.h"
 
-ConvertFloatToInt16::ConvertFloatToInt16(AbstractAccessStrategy::Ptr accessStrategy,
-                                         CALC_PTR(float, int16_t) input,
-                                         BUFFER_PTR(int16_t) output) :
-    TCalcContainer<float, int16_t>({input}, output, accessStrategy)
+ConvertFloatToInt16::ConvertFloatToInt16(CALC_PTR(float) input,
+                                         BUFFER_PTR(int16_t) output,
+                                         AbstractAccessStrategy::Ptr accessStrategy) :
+    CalculatorBase<int16_t>({input}, output, accessStrategy)
 {
 }
 
-bool ConvertFloatToInt16::doCalc(int sampleCount)
+void ConvertFloatToInt16::doCalc(int sampleCount)
 {
-    return true;
 }

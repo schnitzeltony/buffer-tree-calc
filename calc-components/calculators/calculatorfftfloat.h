@@ -2,17 +2,24 @@
 #define CALCULATORFFTFLOAT_H
 
 #include "buffers/buffertemplate.h"
-#include "calc-components/tcalccontainer.h"
+#include "calc-components/calculatorbase.h"
 
-class CalculatorFftFloat : public TCalcContainer<float, float>
+class CalculatorFftFloat : public CalculatorBase<float>
 {
 public:
     CalculatorFftFloat(AbstractAccessStrategy::Ptr accessStrategy,
-                       CALC_PTR(float, float) input,
+                       CALC_PTR(float) input,
                        BUFFER_PTR(float) output);
-    virtual bool doCalc(int sampleCount) override;
-    virtual void doInit() override;
-    virtual void doDestroy() override;
+    virtual void doCalc(int sampleCount) override;
+    virtual void init() override;
+    virtual void destroy() override;
+
+    template <typename ACCESS_STRATEGY>
+    static std::shared_ptr<CalculatorFftFloat> createWithOutBuffer(int bufferSize)
+    {
+        return std::make_shared<CalculatorFftFloat>(std::make_shared<BufferTemplate<float>>(bufferSize),
+                                                    createAccessStrategy<ACCESS_STRATEGY>());
+    }
 };
 
 #endif // CALCULATORFFTFLOAT_H

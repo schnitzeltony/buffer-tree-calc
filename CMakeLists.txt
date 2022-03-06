@@ -111,6 +111,7 @@ if(NOT CMAKE_CROSSCOMPILING AND ${GTest_FOUND})
 
     file(GLOB UNITTESTS
         tests/*.cpp
+        tests/*.h
     )
 
     add_executable(${PROJECT_NAME}-unittest
