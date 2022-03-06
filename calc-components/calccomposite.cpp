@@ -32,15 +32,15 @@ void CalcComposite::prepareCalc()
 
 bool CalcComposite::tryStartCalc(int sampleCount)
 {
-    bool allDone = true;
+    bool atLeastOneStarted = false;
     for(auto input : m_components) {
         if(!input->isDone()) {
-            if(!input->tryStartCalc(sampleCount)) {
-                allDone = false;
+            if(input->tryStartCalc(sampleCount)) {
+                atLeastOneStarted = true;
             }
         }
     }
-    return allDone;
+    return atLeastOneStarted;
 }
 
 bool CalcComposite::isDone() const

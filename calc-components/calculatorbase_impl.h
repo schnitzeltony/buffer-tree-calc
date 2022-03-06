@@ -30,14 +30,14 @@ bool CalculatorBase<T>::isDone() const
 template <class T>
 bool CalculatorBase<T>::tryStartCalc(int sampleCount)
 {
-    bool allDone = true;
+    bool atLeastOneStarted = false;
     if(!m_inputsComposite.isDone()) {
-        allDone = m_inputsComposite.tryStartCalc(sampleCount);
+        atLeastOneStarted = m_inputsComposite.tryStartCalc(sampleCount);
     }
-    if(allDone && !m_AccessComponent.isDone()) {
-        allDone = m_AccessComponent.tryStartCalc(sampleCount);
+    if(!m_AccessComponent.isDone()) {
+        atLeastOneStarted |= m_AccessComponent.tryStartCalc(sampleCount);
     }
-    return allDone;
+    return atLeastOneStarted;
 }
 
 template <class T>

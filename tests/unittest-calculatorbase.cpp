@@ -43,6 +43,14 @@ TEST(CALCULATORBASE, SINGLE_IN_OUT_TRY_START_RET) {
     EXPECT_FALSE(tstcalc->tryStartCalc(3));
 }
 
+TEST(CALCULATORBASE, SINGLE_IN_OUT_TRY_START_RET_RESET) {
+    CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) tstcalc = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
+
+    tstcalc->tryStartCalc(3);
+    tstcalc.reset();
+    EXPECT_TRUE(tstcalc->tryStartCalc(3));
+}
 
 TEST(CALCULATORBASE, SINGLE_IN_OUT_DONE) {
     CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
