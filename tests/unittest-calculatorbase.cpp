@@ -3,7 +3,6 @@
 #include "buffers/buffertemplate.h"
 #include "calc-components/calculators/calculatornull.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
-#include "calcfortest.h"
 
 TEST(CALCULATORBASE, SINGLE_IN_OUT_COMPARE) {
     CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);

@@ -11,29 +11,22 @@ public:
     CalculatorDiff(CALC_PTR(T) minuent,
                    CALC_PTR(T) subtrahent,
                    BUFFER_PTR(T) output,
-                   AbstractAccessStrategy::Ptr accessStrategy) :
-        CalculatorBase<T>(std::vector<CalcInterface::Ptr> {minuent, subtrahent}, output, accessStrategy),
-        m_minuentBuffer(minuent->getOutputBuffer()),
-        m_subtrahentBuffer(subtrahent->getOutputBuffer())
-    {}
-    virtual void doCalc(int sampleCount) override
-    {
-        BUFFER_PTR(T) outBuff = CalculatorBase<T>::getOutputBuffer();
-        for(int i=0, currSample = CalculatorBase<T>::getSampleOffset();
-            i<sampleCount;
-            ++i, ++currSample) {
-            outBuff.at(currSample) = m_minuentBuffer.at(currSample) - m_subtrahentBuffer.at(currSample);
-        }
-    }
+                   AbstractAccessStrategy::Ptr accessStrategy);
+    virtual void doCalc(int sampleCount) override;
+
     template <typename ACCESS_STRATEGY>
-    static std::shared_ptr<CalculatorDiff<T>> createWithOutBuffer(int bufferSize)
+    static std::shared_ptr<CalculatorDiff<T>> createWithOutBuffer(CALC_PTR(T) minuent, CALC_PTR(T) subtrahent, int bufferSize)
     {
-        return std::make_shared<CalculatorDiff<T>>(std::make_shared<BufferTemplate<T>>(bufferSize),
+        return std::make_shared<CalculatorDiff<T>>(minuent,
+                                                   subtrahent,
+                                                   std::make_shared<BufferTemplate<T>>(bufferSize),
                                                    createAccessStrategy<ACCESS_STRATEGY>());
     }
 private:
     BUFFER_PTR(T) m_minuentBuffer;
     BUFFER_PTR(T) m_subtrahentBuffer;
 };
+
+#include "calculatordiff_impl.h"
 
 #endif // CALCULATORDIFF_H
