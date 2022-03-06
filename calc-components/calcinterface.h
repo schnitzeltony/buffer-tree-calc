@@ -12,7 +12,7 @@ public:
 
     virtual void prepareCalc() = 0;
     virtual bool tryStartCalc(int sampleCount) = 0;
-    virtual bool isDone() = 0;
+    virtual bool isDone() const = 0;
 protected:
     virtual bool doCalc(int sampleCount) = 0;
 };

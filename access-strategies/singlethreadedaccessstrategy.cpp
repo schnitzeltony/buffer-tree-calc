@@ -14,7 +14,7 @@ void SingleThreadedAccessStrategy::setDone()
     m_done = true;
 }
 
-bool SingleThreadedAccessStrategy::isDone()
+bool SingleThreadedAccessStrategy::isDone() const
 {
     return m_done;
 }

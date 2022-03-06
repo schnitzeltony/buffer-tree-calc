@@ -21,7 +21,7 @@ bool CalcComponent::tryStartCalc(int sampleCount)
     return calcDoneByMe;
 }
 
-bool CalcComponent::isDone()
+bool CalcComponent::isDone() const
 {
     return m_accessStrategy->isDone();
 }

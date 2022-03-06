@@ -44,7 +44,7 @@ bool CalcComposite::tryStartCalc(int sampleCount)
     return doCalc(sampleCount);
 }
 
-bool CalcComposite::isDone()
+bool CalcComposite::isDone() const
 {
     bool done = true;
     for(auto component : m_components) {

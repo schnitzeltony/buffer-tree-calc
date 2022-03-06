@@ -13,7 +13,7 @@ public:
 
     virtual void prepareCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
-    virtual bool isDone() override final;
+    virtual bool isDone() const override final;
 protected:
     virtual bool doCalc(int sampleCount) override final;
 private:
