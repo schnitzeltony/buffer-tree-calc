@@ -14,7 +14,7 @@ public:
     virtual bool tryStartCalc(int sampleCount) = 0;
     virtual bool isDone() const = 0;
 protected:
-    virtual bool doCalc(int sampleCount) = 0;
+    virtual void doCalc(int sampleCount) = 0;
 };
 
 #endif // CALCINTERFACE_H

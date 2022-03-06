@@ -5,17 +5,8 @@ CalcComposite::CalcComposite(std::vector<Ptr> components) :
 {
 }
 
-bool CalcComposite::doCalc(int sampleCount)
+void CalcComposite::doCalc(int)
 {
-    bool allDone = true;
-    for(auto input : m_components) {
-        if(!input->isDone()) {
-            if(!input->tryStartCalc(sampleCount)) {
-                allDone = false;
-            }
-        }
-    }
-    return allDone;
 }
 
 void CalcComposite::init()
@@ -41,7 +32,15 @@ void CalcComposite::prepareCalc()
 
 bool CalcComposite::tryStartCalc(int sampleCount)
 {
-    return doCalc(sampleCount);
+    bool allDone = true;
+    for(auto input : m_components) {
+        if(!input->isDone()) {
+            if(!input->tryStartCalc(sampleCount)) {
+                allDone = false;
+            }
+        }
+    }
+    return allDone;
 }
 
 bool CalcComposite::isDone() const

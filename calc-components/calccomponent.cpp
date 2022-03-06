@@ -26,7 +26,7 @@ bool CalcComponent::isDone() const
     return m_accessStrategy->isDone();
 }
 
-bool CalcComponent::doCalc(int sampleCount)
+void CalcComponent::doCalc(int sampleCount)
 {
-    return m_doCalcHandler(sampleCount);
+    m_doCalcHandler(sampleCount);
 }

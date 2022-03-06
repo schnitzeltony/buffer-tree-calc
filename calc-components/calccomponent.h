@@ -16,7 +16,7 @@ public:
     virtual bool tryStartCalc(int sampleCount) override final;
     virtual bool isDone() const override final;
 protected:
-    virtual bool doCalc(int sampleCount) override final;
+    virtual void doCalc(int sampleCount) override final;
 private:
     AbstractAccessStrategy::Ptr m_accessStrategy;
     std::function<bool(int)> m_doCalcHandler = nullptr;
