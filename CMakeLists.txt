@@ -21,6 +21,7 @@ file(GLOB HEADERS
     buffers/*.h
     calc-components/*.h
     calc-components/calculators/*.h
+    calc-components/template-implementations/*.h
 )
 
 file(GLOB SOURCES
