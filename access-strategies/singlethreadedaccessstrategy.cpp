@@ -11,6 +11,9 @@ bool SingleThreadedAccessStrategy::tryMakeBusy()
 
 void SingleThreadedAccessStrategy::setDone()
 {
+    if(m_done) {
+        throw double_done_exception();
+    }
     m_done = true;
 }
 

@@ -2,6 +2,16 @@
 #define ABSTRACTACCESSSTRATEGY_H
 
 #include <memory>
+#include <exception>
+
+class double_done_exception : public std::exception
+{
+    virtual const char* what() const throw() override
+    {
+        return "setDone called twice without reset";
+    }
+};
+
 
 class AbstractAccessStrategy
 {
