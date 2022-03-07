@@ -2,6 +2,7 @@
 #include "calcfortest.h"
 #include "buffers/buffertemplate.h"
 #include "calc-components/calculators/calculatornull.h"
+#include "calc-components/calculators/calculatordiff.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
 
 TEST(CALCULATORBASE, SINGLE_IN_OUT_COMPARE) {
@@ -150,7 +151,7 @@ TEST(CALCULATORBASE, DUAL_IN_OUT_TRY_START_RESET_RETRY) {
     EXPECT_TRUE(tstcalc2->tryStartCalc(3));
 }
 
-TEST(CALCULATORBASE, DUUAL_IN_OUT_DONE) {
+TEST(CALCULATORBASE, DUAL_IN_OUT_DONE) {
     CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     CALC_PTR(int16_t) tstcalc1 = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
     CALC_PTR(int16_t) tstcalc2 = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(tstcalc1, 10);
@@ -184,3 +185,84 @@ TEST(CALCULATORBASE, DUAL_IN_OUT_DONE_RESET) {
     EXPECT_FALSE(tstcalc2->isDone());
 }
 
+// diff calc is our firs calculator with two inputs
+TEST(CALCULATORBASE, SINGLE_TREE_SECOND_UNTOUCHED) {
+    CALC_PTR(int16_t) inCalc1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) inCalc2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc1, inCalc2, 10);
+
+    inCalc1->tryStartCalc(3);
+    inCalc2->tryStartCalc(3);
+    EXPECT_EQ(inCalc1->getSampleOffset(), 3);
+    EXPECT_EQ(inCalc2->getSampleOffset(), 3);
+    EXPECT_EQ(calcDiff->getSampleOffset(), 0);
+}
+
+TEST(CALCULATORBASE, SINGLE_TREE_SAMPLE_OFFSET) {
+    CALC_PTR(int16_t) inCalc1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) inCalc2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc1, inCalc2, 10);
+    calcDiff->tryStartCalc(3);
+    EXPECT_EQ(inCalc1->getSampleOffset(), 3);
+    EXPECT_EQ(inCalc2->getSampleOffset(), 3);
+    EXPECT_EQ(calcDiff->getSampleOffset(), 3);
+}
+
+TEST(CALCULATORBASE, SINGLE_TREE_TRY_START_RETRY) {
+    CALC_PTR(int16_t) inCalc1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) inCalc2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc1, inCalc2, 10);
+    EXPECT_TRUE(calcDiff->tryStartCalc(3));
+    EXPECT_FALSE(inCalc1->tryStartCalc(3));
+    EXPECT_FALSE(inCalc2->tryStartCalc(3));
+    EXPECT_FALSE(calcDiff->tryStartCalc(3));
+}
+
+TEST(CALCULATORBASE, SINGLE_TREE_TRY_START_RESET_RETRY) {
+    CALC_PTR(int16_t) inCalc1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) inCalc2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc1, inCalc2, 10);
+
+    calcDiff->tryStartCalc(3);
+    calcDiff->prepareNextCalc();
+    EXPECT_TRUE(calcDiff->tryStartCalc(3));
+
+    calcDiff->prepareNextCalc();
+    EXPECT_TRUE(inCalc1->tryStartCalc(3));
+    EXPECT_TRUE(inCalc2->tryStartCalc(3));
+}
+
+TEST(CALCULATORBASE, SINGLE_TREE_DONE) {
+    CALC_PTR(int16_t) inCalc1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) inCalc2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc1, inCalc2, 10);
+
+    EXPECT_FALSE(inCalc1->isDone());
+    EXPECT_FALSE(inCalc2->isDone());
+    EXPECT_FALSE(calcDiff->isDone());
+
+    calcDiff->tryStartCalc(3);
+    EXPECT_TRUE(inCalc1->isDone());
+    EXPECT_TRUE(inCalc2->isDone());
+    EXPECT_TRUE(calcDiff->isDone());
+}
+
+TEST(CALCULATORBASE, SINGLE_TREE_DONE_RESET) {
+    CALC_PTR(int16_t) inCalc1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) inCalc2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc1, inCalc2, 10);
+
+    calcDiff->tryStartCalc(3);
+    calcDiff->prepareNextCalc();
+
+    EXPECT_FALSE(inCalc1->isDone());
+    EXPECT_FALSE(inCalc2->isDone());
+    EXPECT_FALSE(calcDiff->isDone());
+
+    calcDiff->prepareNextCalc();
+    inCalc1->tryStartCalc(3);
+    inCalc2->tryStartCalc(3);
+    EXPECT_TRUE(inCalc1->isDone());
+    EXPECT_TRUE(inCalc2->isDone());
+    EXPECT_FALSE(calcDiff->isDone());
+}
