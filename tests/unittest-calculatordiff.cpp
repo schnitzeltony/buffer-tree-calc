@@ -5,7 +5,7 @@
 #include "calc-components/calculators/calculatordiff.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
 
-TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_INT16) {
+TEST(TEST_DIFF_CALC, VALID_INT16) {
     CALC_PTR(int16_t) calcMinuent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(int16_t) buffMinuent = calcMinuent->getOutputBuffer();
     CALC_PTR(int16_t) calcSubtrahent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
@@ -27,7 +27,7 @@ TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_INT16) {
     EXPECT_EQ(buffMinuent->at(1) - buffSubtrahent->at(1), diffBuff->at(1));
 }
 
-TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_FLOAT) {
+TEST(TEST_DIFF_CALC, VALID_FLOAT) {
     CALC_PTR(float) calcMinuent = CalculatorNull<float>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(float) buffMinuent = calcMinuent->getOutputBuffer();
     CALC_PTR(float) calcSubtrahent = CalculatorNull<float>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
@@ -49,7 +49,7 @@ TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_FLOAT) {
     EXPECT_FLOAT_EQ(buffMinuent->at(1) - buffSubtrahent->at(1), diffBuff->at(1));
 }
 
-TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_DOUBLE) {
+TEST(TEST_DIFF_CALC, VALID_DOUBLE) {
     CALC_PTR(double) calcMinuent = CalculatorNull<double>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(double) buffMinuent = calcMinuent->getOutputBuffer();
     CALC_PTR(double) calcSubtrahent = CalculatorNull<double>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
@@ -71,7 +71,7 @@ TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_DOUBLE) {
     EXPECT_DOUBLE_EQ(buffMinuent->at(1) - buffSubtrahent->at(1), diffBuff->at(1));
 }
 
-TEST(TEST_DIFF_CALC, SUBSTRACT_SCALAR_VALID_INT16) {
+TEST(TEST_DIFF_CALC, SCALAR_VALID_INT16) {
     CALC_PTR(int16_t) calcMinuent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(int16_t) buffMinuent = calcMinuent->getOutputBuffer();
     CALC_PTR(int16_t) calcSubtrahent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(1);

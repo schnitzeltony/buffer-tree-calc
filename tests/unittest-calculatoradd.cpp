@@ -5,7 +5,7 @@
 #include "calc-components/calculators/calculatoradd.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
 
-TEST(TEST_ADD_CALC, SUBSTRACT_VALID_INT16) {
+TEST(TEST_ADD_CALC, VALID_INT16) {
     CALC_PTR(int16_t) calcBuff1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(int16_t) buffBuff1 = calcBuff1->getOutputBuffer();
     CALC_PTR(int16_t) calcBuff2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
@@ -27,7 +27,7 @@ TEST(TEST_ADD_CALC, SUBSTRACT_VALID_INT16) {
     EXPECT_EQ(buffBuff1->at(1) + buffBuff2->at(1), addBuff->at(1));
 }
 
-TEST(TEST_ADD_CALC, SUBSTRACT_VALID_FLOAT) {
+TEST(TEST_ADD_CALC, VALID_FLOAT) {
     CALC_PTR(float) calcBuff1 = CalculatorNull<float>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(float) buffBuff1 = calcBuff1->getOutputBuffer();
     CALC_PTR(float) calcBuff2 = CalculatorNull<float>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
@@ -49,7 +49,7 @@ TEST(TEST_ADD_CALC, SUBSTRACT_VALID_FLOAT) {
     EXPECT_FLOAT_EQ(buffBuff1->at(1) + buffBuff2->at(1), addBuff->at(1));
 }
 
-TEST(TEST_ADD_CALC, SUBSTRACT_VALID_DOUBLE) {
+TEST(TEST_ADD_CALC, VALID_DOUBLE) {
     CALC_PTR(double) calcBuff1 = CalculatorNull<double>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(double) buffBuff1 = calcBuff1->getOutputBuffer();
     CALC_PTR(double) calcBuff2 = CalculatorNull<double>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
@@ -71,7 +71,7 @@ TEST(TEST_ADD_CALC, SUBSTRACT_VALID_DOUBLE) {
     EXPECT_DOUBLE_EQ(buffBuff1->at(1) + buffBuff2->at(1), addBuff->at(1));
 }
 
-TEST(TEST_ADD_CALC, SUBSTRACT_SCALAR_VALID_INT16) {
+TEST(TEST_ADD_CALC, SCALAR_VALID_INT16) {
     CALC_PTR(int16_t) calcBuff1 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     BUFFER_PTR(int16_t) buffBuff1 = calcBuff1->getOutputBuffer();
     CALC_PTR(int16_t) calcBuff2 = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(1);
