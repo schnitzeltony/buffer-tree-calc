@@ -6,7 +6,7 @@ CalcComponent::CalcComponent(std::function<void (int)> doCalcHandler, AbstractAc
 {
 }
 
-void CalcComponent::prepareCalc()
+void CalcComponent::prepareNextCalc()
 {
     m_accessStrategy->reset();
 }

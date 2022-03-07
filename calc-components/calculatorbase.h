@@ -18,7 +18,7 @@ public:
     virtual void init() override {}
     virtual void destroy() override {}
 
-    virtual void prepareCalc() override final;
+    virtual void prepareNextCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
     virtual bool isDone() const override final;
 

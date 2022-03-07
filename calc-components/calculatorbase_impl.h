@@ -14,11 +14,11 @@ CalculatorBase<T>::CalculatorBase(std::vector<CalcInterface::Ptr> inputCalculato
 }
 
 template <class T>
-void CalculatorBase<T>::prepareCalc()
+void CalculatorBase<T>::prepareNextCalc()
 {
     m_sampleOffset = 0;
-    m_inputsComposite.prepareCalc();
-    m_AccessComponent.prepareCalc();
+    m_inputsComposite.prepareNextCalc();
+    m_AccessComponent.prepareNextCalc();
 }
 
 template <class T>

@@ -10,7 +10,7 @@ public:
     virtual void init() = 0;
     virtual void destroy() = 0;
 
-    virtual void prepareCalc() = 0;
+    virtual void prepareNextCalc() = 0;
     virtual bool tryStartCalc(int sampleCount) = 0;
     virtual bool isDone() const = 0;
 protected:

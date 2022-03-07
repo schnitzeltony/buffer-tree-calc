@@ -23,10 +23,10 @@ void CalcComposite::destroy()
     }
 }
 
-void CalcComposite::prepareCalc()
+void CalcComposite::prepareNextCalc()
 {
     for(auto component : m_components) {
-        component->prepareCalc();
+        component->prepareNextCalc();
     }
 }
 
