@@ -21,7 +21,7 @@ public:
 
     BUFFER_PTR(T) getOutputBuffer() { return m_outputBuffer; }
     int getSampleOffset() const { return m_sampleOffset; }
-
+    void keepSampleOffsetOnNextTryStart(bool keep) { m_keepSampleOffsetOnNextTryStart = keep; }
 protected:
     BUFFER_PTR(T) m_outputBuffer;
 private:
@@ -29,6 +29,7 @@ private:
     CalcComponent m_AccessComponent;
     CalcComposite m_inputsComposite;
     int m_sampleOffset = 0;
+    bool m_keepSampleOffsetOnNextTryStart = false;
 };
 
 #include "calculatorbase_impl.h"

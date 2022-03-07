@@ -33,6 +33,28 @@ TEST(CALCULATORBASE, SINGLE_IN_OUT_SAMPLE_OFFSET) {
     EXPECT_EQ(inCalc->getSampleOffset(), 3);
 }
 
+TEST(CALCULATORBASE, SINGLE_IN_OUT_SAMPLE_OFFSET_KEEP) {
+    CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) tstcalc = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
+    tstcalc->tryStartCalc(3);
+    inCalc->keepSampleOffsetOnNextTryStart(true);
+    tstcalc->prepareNextCalc();
+    EXPECT_EQ(tstcalc->getSampleOffset(), 0);
+    EXPECT_EQ(inCalc->getSampleOffset(), 3);
+
+    tstcalc->tryStartCalc(3);
+    inCalc->keepSampleOffsetOnNextTryStart(false);
+    tstcalc->prepareNextCalc();
+    EXPECT_EQ(tstcalc->getSampleOffset(), 0);
+    EXPECT_EQ(inCalc->getSampleOffset(), 0);
+
+    tstcalc->tryStartCalc(3);
+    tstcalc->keepSampleOffsetOnNextTryStart(true);
+    tstcalc->prepareNextCalc();
+    EXPECT_EQ(tstcalc->getSampleOffset(), 3);
+    EXPECT_EQ(inCalc->getSampleOffset(), 0);
+}
+
 TEST(CALCULATORBASE, SINGLE_IN_OUT_TRY_START_RETRY) {
     CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
     CALC_PTR(int16_t) tstcalc = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
