@@ -11,8 +11,6 @@ public:
                        CALC_PTR(float) input,
                        BUFFER_PTR(float) output);
     virtual void doCalc(int sampleCount) override;
-    virtual void init() override;
-    virtual void destroy() override;
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<CalculatorFftFloat> createWithOutBuffer(int bufferSize)

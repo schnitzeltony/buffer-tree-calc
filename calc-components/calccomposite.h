@@ -8,8 +8,6 @@ class CalcComposite : public CalcInterface
 {
 public:
     CalcComposite(std::vector<Ptr> components);
-    virtual void init() override final;
-    virtual void destroy() override final;
 
     virtual void prepareNextCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;

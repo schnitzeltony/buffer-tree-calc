@@ -9,20 +9,6 @@ void CalcComposite::doCalc(int)
 {
 }
 
-void CalcComposite::init()
-{
-    for(auto component : m_components) {
-        component->init();
-    }
-}
-
-void CalcComposite::destroy()
-{
-    for(auto component : m_components) {
-        component->destroy();
-    }
-}
-
 void CalcComposite::prepareNextCalc()
 {
     for(auto component : m_components) {
