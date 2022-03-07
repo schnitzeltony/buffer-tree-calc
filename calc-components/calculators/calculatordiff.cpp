@@ -1,2 +1,0 @@
-#include "calculatordiff.h"
-
