@@ -70,3 +70,26 @@ TEST(TEST_DIFF_CALC, SUBSTRACT_VALID_DOUBLE) {
     EXPECT_DOUBLE_EQ(buffMinuent->at(0) - buffSubtrahent->at(0), diffBuff->at(0));
     EXPECT_DOUBLE_EQ(buffMinuent->at(1) - buffSubtrahent->at(1), diffBuff->at(1));
 }
+
+TEST(TEST_DIFF_CALC, SUBSTRACT_SCALAR_VALID_INT16) {
+    CALC_PTR(int16_t) calcMinuent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int16_t) buffMinuent = calcMinuent->getOutputBuffer();
+    CALC_PTR(int16_t) calcSubtrahent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(1);
+    BUFFER_PTR(int16_t) buffSubtrahent = calcSubtrahent->getOutputBuffer();
+
+    CALC_PTR(int16_t) calcDiff = CalculatorDiff<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(
+                calcMinuent,
+                calcSubtrahent,
+                10,
+                true);
+
+    buffSubtrahent->at(0) = 1;
+    buffMinuent->at(0) = 1;
+    buffMinuent->at(1) = 2;
+    calcDiff->tryStartCalc(2);
+
+    BUFFER_PTR(int16_t) diffBuff = calcDiff->getOutputBuffer();
+    EXPECT_EQ(buffMinuent->at(0) - buffSubtrahent->at(0), diffBuff->at(0));
+    EXPECT_EQ(buffMinuent->at(1) - buffSubtrahent->at(0), diffBuff->at(1));
+}
+
