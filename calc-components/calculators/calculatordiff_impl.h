@@ -5,9 +5,9 @@
 
 template <class T>
 CalculatorDiff<T>::CalculatorDiff(CALC_PTR(T) minuent,
-               CALC_PTR(T) subtrahent,
-               BUFFER_PTR(T) output,
-               AbstractAccessStrategy::Ptr accessStrategy) :
+                                  CALC_PTR(T) subtrahent,
+                                  BUFFER_PTR(T) output,
+                                  AbstractAccessStrategy::Ptr accessStrategy) :
     CalculatorBase<T>(std::vector<CalcInterface::Ptr> {minuent, subtrahent}, output, accessStrategy),
     m_minuentBuffer(minuent->getOutputBuffer()),
     m_subtrahentBuffer(subtrahent->getOutputBuffer())
