@@ -32,6 +32,9 @@ file(GLOB SOURCES
 )
 
 find_package (Threads)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(fftw3f REQUIRED fftw3f)
+pkg_check_modules(fftw3 REQUIRED fftw3)
 
 add_library(buffer-tree-calc SHARED
     ${HEADERS}
@@ -41,6 +44,8 @@ add_library(buffer-tree-calc SHARED
 target_link_libraries (buffer-tree-calc
     PUBLIC
     ${CMAKE_THREAD_LIBS_INIT}
+    fftw3f
+    fftw3
     )
 
 # announce headers - target perspective
