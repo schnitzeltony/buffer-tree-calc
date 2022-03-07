@@ -24,6 +24,12 @@ file(GLOB HEADERS
     calc-components/template-implementations/*.h
 )
 
+# install public headers
+set(HEADER_INSTALL_PATH ${CMAKE_INSTALL_INCLUDEDIR}/buffer-tree-calc)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/access-strategies DESTINATION ${HEADER_INSTALL_PATH} FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/buffers DESTINATION ${HEADER_INSTALL_PATH} FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/calc-components DESTINATION ${HEADER_INSTALL_PATH} FILES_MATCHING PATTERN "*.h")
+
 file(GLOB SOURCES
     access-strategies/*.cpp
     buffers/*.cpp
@@ -52,7 +58,7 @@ target_link_libraries (buffer-tree-calc
 target_include_directories(buffer-tree-calc
     PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/buffer-tree-calc>
+    $<INSTALL_INTERFACE:${HEADER_INSTALL_PATH}>
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     )
@@ -66,10 +72,10 @@ include(GenerateExportHeader)
 generate_export_header(buffer-tree-calc)
 
 #install export header
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/buffer-tree-calc_export.h
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/buffer-tree-calc
-    )
+#install(FILES
+#    ${CMAKE_CURRENT_BINARY_DIR}/buffer-tree-calc_export.h
+#    DESTINATION ${HEADER_INSTALL_PATH}
+#    )
 
 # install library
 install(TARGETS buffer-tree-calc
@@ -100,13 +106,7 @@ install(EXPORT BufferTreeCalcExport
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/BufferTreeCalc
     )
 
-# install public headers
-install(
-    FILES ${HEADERS}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/buffer-tree-calc
-    )
-
-
+# unittests
 find_package(GTest)
 if(NOT CMAKE_CROSSCOMPILING AND ${GTest_FOUND})
     message(STATUS "unittest ${PROJECT_NAME}")
