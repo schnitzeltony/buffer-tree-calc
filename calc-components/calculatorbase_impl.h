@@ -16,7 +16,9 @@ CalculatorBase<T>::CalculatorBase(std::vector<CalcInterface::Ptr> inputCalculato
 template <class T>
 void CalculatorBase<T>::prepareNextCalc()
 {
-    m_sampleOffset = 0;
+    if(!m_keepSampleOffsetOnNextTryStart) {
+        m_sampleOffset = 0;
+    }
     m_inputsComposite.prepareNextCalc();
     m_AccessComponent.prepareNextCalc();
 }
