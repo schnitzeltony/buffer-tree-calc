@@ -10,13 +10,3 @@ CalculatorFftFloat::CalculatorFftFloat(AbstractAccessStrategy::Ptr accessStrateg
 void CalculatorFftFloat::doCalc(int sampleCount)
 {
 }
-
-void CalculatorFftFloat::init()
-{
-
-}
-
-void CalculatorFftFloat::destroy()
-{
-
-}

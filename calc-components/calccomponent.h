@@ -9,9 +9,6 @@ class CalcComponent : public CalcInterface
 {
 public:
     CalcComponent(std::function<void(int)> doCalcHandler, AbstractAccessStrategy::Ptr accessStrategy);
-    virtual void init() override { }
-    virtual void destroy() override { }
-
     virtual void prepareNextCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
     virtual bool isDone() const override final;

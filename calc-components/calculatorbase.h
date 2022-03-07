@@ -15,9 +15,6 @@ public:
     CalculatorBase(std::vector<CalcInterface::Ptr> inputCalculators,
                    BUFFER_PTR(T) outputBuffer,
                    AbstractAccessStrategy::Ptr accessStrategy);
-    virtual void init() override {}
-    virtual void destroy() override {}
-
     virtual void prepareNextCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
     virtual bool isDone() const override final;

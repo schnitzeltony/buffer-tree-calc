@@ -7,8 +7,6 @@ class CalcInterface
 {
 public:
     typedef std::shared_ptr<CalcInterface> Ptr;
-    virtual void init() = 0;
-    virtual void destroy() = 0;
 
     virtual void prepareNextCalc() = 0;
     virtual bool tryStartCalc(int sampleCount) = 0;
