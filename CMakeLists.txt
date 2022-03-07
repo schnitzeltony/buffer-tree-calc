@@ -97,8 +97,8 @@ install(EXPORT BufferTreeCalcExport
 
 # install public headers
 install(
-    FILES ${HEADER}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/BufferTreeCalc
+    FILES ${HEADERS}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/buffer-tree-calc
     )
 
 
