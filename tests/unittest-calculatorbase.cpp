@@ -69,8 +69,49 @@ TEST(CALCULATORBASE, SINGLE_IN_OUT_DONE_RESET) {
     CALC_PTR(int16_t) tstcalc = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
 
     tstcalc->tryStartCalc(3);
-    tstcalc.reset();
+    tstcalc->prepareNextCalc();
 
     EXPECT_FALSE(tstcalc->isDone());
     EXPECT_FALSE(inCalc->isDone());
 }
+
+
+TEST(CALCULATORBASE, DUAL_IN_OUT_COMPARE) {
+    CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int16_t) inBuff = inCalc->getOutputBuffer();
+    inBuff->at(0) = 1;
+    inBuff->at(1) = 2;
+    inBuff->at(2) = 3;
+    inBuff->at(3) = 4;
+
+    CALC_PTR(int16_t) tstcalc1 = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
+    BUFFER_PTR(int16_t) outBuff1 = tstcalc1->getOutputBuffer();
+    outBuff1->at(3) = 0;
+
+    CALC_PTR(int16_t) tstcalc2 = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(tstcalc1, 10);
+    BUFFER_PTR(int16_t) outBuff2 = tstcalc2->getOutputBuffer();
+    outBuff2->at(3) = 0;
+
+    tstcalc2->tryStartCalc(3);
+
+    EXPECT_EQ(inBuff->at(0), outBuff1->at(0));
+    EXPECT_EQ(inBuff->at(1), outBuff1->at(1));
+    EXPECT_EQ(inBuff->at(2), outBuff1->at(2));
+    EXPECT_NE(inBuff->at(3), outBuff1->at(3));
+
+    EXPECT_EQ(inBuff->at(0), outBuff2->at(0));
+    EXPECT_EQ(inBuff->at(1), outBuff2->at(1));
+    EXPECT_EQ(inBuff->at(2), outBuff2->at(2));
+    EXPECT_NE(inBuff->at(3), outBuff2->at(3));
+}
+
+TEST(CALCULATORBASE, DUAL_IN_OUT_SAMPLE_OFFSET) {
+    CALC_PTR(int16_t) inCalc = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    CALC_PTR(int16_t) tstcalc1 = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(inCalc, 10);
+    CALC_PTR(int16_t) tstcalc2 = CalcForTest<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(tstcalc1, 10);
+    tstcalc2->tryStartCalc(3);
+    EXPECT_EQ(tstcalc1->getSampleOffset(), 3);
+    EXPECT_EQ(tstcalc2->getSampleOffset(), 3);
+    EXPECT_EQ(inCalc->getSampleOffset(), 3);
+}
+
