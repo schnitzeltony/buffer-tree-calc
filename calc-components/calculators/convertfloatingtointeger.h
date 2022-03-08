@@ -25,9 +25,8 @@ public:
         for(int i=0, currSample = CalculatorBase<I_TYPE>::getSampleOffset();
                 i<sampleCount;
                 ++i, ++currSample) {
-            F_TYPE temp = (m_inBuff->at(currSample) * (F_TYPE)m_scalingFactor);
             outBuff->at(currSample) =
-                    (I_TYPE)(m_inBuff->at(currSample) * (F_TYPE)m_scalingFactor);
+                    (I_TYPE)((double)m_inBuff->at(currSample) * (double)m_scalingFactor);
         }
     };
 
