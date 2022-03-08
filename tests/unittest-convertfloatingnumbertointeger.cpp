@@ -1,4 +1,4 @@
-#include "calc-components/calculators/convertfloatingnumbertointeger.h"
+#include "calc-components/calculators/convertfloatingtointeger.h"
 #include "buffers/buffertemplate.h"
 #include "calc-components/calculators/calculatornull.h"
 #include "access-strategies/singlethreadedaccessstrategy.h"
