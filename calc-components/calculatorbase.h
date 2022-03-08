@@ -8,6 +8,7 @@
 
 #define CALC_PTR(T) std::shared_ptr<CalculatorBase<T>>
 
+// consider CalculatorBase as another composite
 template <class T>
 class CalculatorBase : public CalcInterface
 {
