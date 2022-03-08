@@ -22,6 +22,10 @@ public:
     BUFFER_PTR(T) getOutputBuffer() { return m_outputBuffer; }
     int getSampleOffset() const { return m_sampleOffset; }
     void keepSampleOffsetOnNextTryStart(bool keep) { m_keepSampleOffsetOnNextTryStart = keep; }
+    // ideas for dynamic sequencing: synced to next doCalc
+    // * change inputs??
+    // * inject doCalc handler (e.g bypass / mute)
+    // * two toggling outputs
 protected:
     BUFFER_PTR(T) m_outputBuffer;
 private:
