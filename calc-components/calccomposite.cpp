@@ -19,9 +19,9 @@ void CalcComposite::prepareNextCalc()
 bool CalcComposite::tryStartCalc(int sampleCount)
 {
     bool atLeastOneStarted = false;
-    for(auto input : m_components) {
-        if(!input->isDone()) {
-            if(input->tryStartCalc(sampleCount)) {
+    for(auto component : m_components) {
+        if(!component->isDone()) {
+            if(component->tryStartCalc(sampleCount)) {
                 atLeastOneStarted = true;
             }
         }
