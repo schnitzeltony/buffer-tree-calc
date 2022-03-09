@@ -10,9 +10,12 @@ ConvertIntegerToFloating<I_TYPE, F_TYPE>::ConvertIntegerToFloating(CALC_PTR(I_TY
                                                                    AbstractAccessStrategy::Ptr accessStrategy,
                                                                    F_TYPE scalingFactor) :
     CalculatorBase<F_TYPE>(std::vector<CalcInterface::Ptr> {input}, output, accessStrategy),
-    m_scalingFactor(scalingFactor),
     m_inBuff(input->getOutputBuffer())
 {
+    if(!scalingFactor) {
+        throw division_by_zero_exception();
+    }
+    m_scalingFactor = scalingFactor;
 }
 
 template <class I_TYPE, class F_TYPE>
@@ -23,7 +26,7 @@ void ConvertIntegerToFloating<I_TYPE, F_TYPE>::doCalc(int sampleCount)
             i<sampleCount;
             ++i, ++currSample) {
         outBuff->at(currSample) =
-                (F_TYPE)((double)m_inBuff->at(currSample) / (double)m_scalingFactor);
+                ((F_TYPE)m_inBuff->at(currSample) / (F_TYPE)m_scalingFactor);
     }
 }
 

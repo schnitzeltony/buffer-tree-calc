@@ -24,3 +24,72 @@ TEST(TEST_CONVERT_INT16_TO_FLOAT, CONVERSION_DEFAULT_SCALE) {
     EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
     EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
 }
+
+TEST(TEST_CONVERT_INT16_TO_FLOAT, CONVERSION_SCALED_BY_ZERO) {
+    CALC_PTR(int16_t) calcIntegerInput = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int16_t) buffIntegerInput = calcIntegerInput->getOutputBuffer();
+
+    BUFFER_PTR(float) buffFloatOutput = std::make_shared<BufferTemplate<float>>(10);
+    AbstractAccessStrategy::Ptr accessStrategy = createAccessStrategy<SingleThreadedAccessStrategy>();
+    //ConvertIntegerToFloating<int16_t, float> calcConvert(calcIntegerInput, buffFloatOutput, accessStrategy, 0.0);
+}
+
+TEST(TEST_CONVERT_INT32_TO_FLOAT, CONVERSION_DEFAULT_SCALE) {
+    CALC_PTR(int32_t) calcIntegerInput = CalculatorNull<int32_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int32_t) buffIntegerInput = calcIntegerInput->getOutputBuffer();
+
+    CALC_PTR(float) calcConvert = ConvertIntegerToFloating<int32_t, float>::createWithOutBuffer<SingleThreadedAccessStrategy>(
+                calcIntegerInput,
+                10);
+
+    buffIntegerInput->at(0) = -std::numeric_limits<int32_t>::max();
+    buffIntegerInput->at(1) = std::numeric_limits<int32_t>::max();
+    buffIntegerInput->at(2) = 0;
+
+    calcConvert->tryStartCalc(2);
+
+    BUFFER_PTR(float) buffFloatOutput = calcConvert->getOutputBuffer();
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+}
+
+TEST(TEST_CONVERT_INT16_TO_DOUBLE, CONVERSION_DEFAULT_SCALE) {
+    CALC_PTR(int16_t) calcIntegerInput = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int16_t) buffIntegerInput = calcIntegerInput->getOutputBuffer();
+
+    CALC_PTR(double) calcConvert = ConvertIntegerToFloating<int16_t, double>::createWithOutBuffer<SingleThreadedAccessStrategy>(
+                calcIntegerInput,
+                10);
+
+    buffIntegerInput->at(0) = -std::numeric_limits<int16_t>::max();
+    buffIntegerInput->at(1) = std::numeric_limits<int16_t>::max();
+    buffIntegerInput->at(2) = 0;
+
+    calcConvert->tryStartCalc(2);
+
+    BUFFER_PTR(double) buffFloatOutput = calcConvert->getOutputBuffer();
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+}
+
+TEST(TEST_CONVERT_INT32_TO_DOUBLE, CONVERSION_DEFAULT_SCALE) {
+    CALC_PTR(int32_t) calcIntegerInput = CalculatorNull<int32_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int32_t) buffIntegerInput = calcIntegerInput->getOutputBuffer();
+
+    CALC_PTR(double) calcConvert = ConvertIntegerToFloating<int32_t, double>::createWithOutBuffer<SingleThreadedAccessStrategy>(
+                calcIntegerInput,
+                10);
+
+    buffIntegerInput->at(0) = -std::numeric_limits<int32_t>::max();
+    buffIntegerInput->at(1) = std::numeric_limits<int32_t>::max();
+    buffIntegerInput->at(2) = 0;
+
+    calcConvert->tryStartCalc(2);
+
+    BUFFER_PTR(double) buffFloatOutput = calcConvert->getOutputBuffer();
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+}
