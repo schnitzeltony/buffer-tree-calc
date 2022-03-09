@@ -21,7 +21,7 @@ CalculatorFftwFloat::CalculatorFftwFloat(CALC_PTR(float) in,
         if(out->size()*2 < m_inBuffer->size()) {
             throw std::out_of_range("Outbuffer too small real->fft-complex");
         }
-        m_fftwPlan = fftwf_plan_dft_c2r_1d(m_inBuffer->size(),
+        m_fftwPlan = fftwf_plan_dft_c2r_1d(m_inBuffer->size()/2,
                                            reinterpret_cast<fftwf_complex*>(m_inBuffer->data()),
                                            out->data(),
                                            FFTW_ESTIMATE);
