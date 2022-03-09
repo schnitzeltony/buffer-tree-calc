@@ -29,11 +29,12 @@ void CalculatorMult2<T1_OUT, T2>::doCalc(int sampleCount)
         }
     }
     else {
+        T2 scalarVal = m_buff2->at(0);
         for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
             i<sampleCount;
             ++i, ++currSample) {
             outBuff->at(currSample) =
-                    m_buff1->at(currSample) * m_buff2->at(0);
+                    m_buff1->at(currSample) * scalarVal;
         }
     }
 }
