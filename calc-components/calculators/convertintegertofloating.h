@@ -5,7 +5,6 @@
 #include "calc-components/calculatorbase.h"
 #include <memory>
 #include <limits>
-#include <exception>
 
 template <class I_TYPE, class F_TYPE>
 class ConvertIntegerToFloating : public CalculatorBase<F_TYPE>
