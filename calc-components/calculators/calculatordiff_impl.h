@@ -41,11 +41,10 @@ void CalculatorDiff2<T1_OUT, T2>::doCalc(int sampleCount)
 
 template <class T1_OUT, class T2>
 template <typename ACCESS_STRATEGY>
-std::shared_ptr<CalculatorDiff2<T1_OUT, T2>> CalculatorDiff2<T1_OUT, T2>::createWithOutBuffer(
-        CALC_PTR(T1_OUT) minuent,
-        CALC_PTR(T2) subtrahent,
-        int bufferSize,
-        bool scalarSubtrahend)
+std::shared_ptr<CalculatorDiff2<T1_OUT, T2>> CalculatorDiff2<T1_OUT, T2>::createWithOutBuffer(CALC_PTR(T1_OUT) minuent,
+                                                                                              CALC_PTR(T2) subtrahent,
+                                                                                              int bufferSize,
+                                                                                              bool scalarSubtrahend)
 {
     return std::make_shared<CalculatorDiff2<T1_OUT, T2>>(minuent,
                                                          subtrahent,
