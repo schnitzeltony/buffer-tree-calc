@@ -13,22 +13,8 @@ public:
     ConvertFloatingToInteger(CALC_PTR(F_TYPE) input,
                              BUFFER_PTR(I_TYPE) output,
                              AbstractAccessStrategy::Ptr accessStrategy,
-                             I_TYPE scalingFactor = m_defaultScalingFactor) :
-        CalculatorBase<I_TYPE>(std::vector<CalcInterface::Ptr> {input}, output, accessStrategy),
-        m_scalingFactor(scalingFactor),
-        m_inBuff(input->getOutputBuffer())
-    {
-    };
-    virtual void doCalc(int sampleCount) override
-    {
-        BUFFER_PTR(I_TYPE) outBuff = CalculatorBase<I_TYPE>::getOutputBuffer();
-        for(int i=0, currSample = CalculatorBase<I_TYPE>::getSampleOffset();
-                i<sampleCount;
-                ++i, ++currSample) {
-            outBuff->at(currSample) =
-                    (I_TYPE)((double)m_inBuff->at(currSample) * (double)m_scalingFactor);
-        }
-    };
+                             I_TYPE scalingFactor = m_defaultScalingFactor);
+    virtual void doCalc(int sampleCount) override;
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<ConvertFloatingToInteger<F_TYPE, I_TYPE>> createWithOutBuffer(CALC_PTR(F_TYPE) floatIn, int bufferSize,
@@ -47,5 +33,6 @@ private:
     BUFFER_PTR(F_TYPE) m_inBuff;
 };
 
+#include "convertfloatingtointeger_impl.h"
 
 #endif // CONVERTFLOATINGNUMBERTOINTEGER_H
