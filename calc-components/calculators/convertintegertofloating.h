@@ -13,32 +13,12 @@ public:
     ConvertIntegerToFloating(CALC_PTR(I_TYPE) input,
                              BUFFER_PTR(F_TYPE) output,
                              AbstractAccessStrategy::Ptr accessStrategy,
-                             F_TYPE scalingFactor = m_defaultScalingFactor) :
-        CalculatorBase<F_TYPE>(std::vector<CalcInterface::Ptr> {input}, output, accessStrategy),
-        m_scalingFactor(scalingFactor),
-        m_inBuff(input->getOutputBuffer())
-    {
-    };
-    virtual void doCalc(int sampleCount) override
-    {
-        BUFFER_PTR(F_TYPE) outBuff = CalculatorBase<F_TYPE>::getOutputBuffer();
-        for(int i=0, currSample = CalculatorBase<F_TYPE>::getSampleOffset();
-                i<sampleCount;
-                ++i, ++currSample) {
-            outBuff->at(currSample) =
-                    (F_TYPE)((double)m_inBuff->at(currSample) / (double)m_scalingFactor);
-        }
-    };
+                             F_TYPE scalingFactor = m_defaultScalingFactor);
+    virtual void doCalc(int sampleCount) override;
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<ConvertIntegerToFloating<I_TYPE, F_TYPE>> createWithOutBuffer(CALC_PTR(I_TYPE) floatIn, int bufferSize,
-                                                                                         F_TYPE scalingFactor = m_defaultScalingFactor)
-    {
-        return std::make_shared<ConvertIntegerToFloating<I_TYPE, F_TYPE>>(floatIn,
-                                                                std::make_shared<BufferTemplate<F_TYPE>>(bufferSize),
-                                                                createAccessStrategy<ACCESS_STRATEGY>(),
-                                                                scalingFactor);
-    }
+                                                                                         F_TYPE scalingFactor = m_defaultScalingFactor);
 
     static constexpr F_TYPE m_defaultScalingFactor = (F_TYPE)std::numeric_limits<I_TYPE>::max();
 
@@ -46,5 +26,7 @@ private:
     F_TYPE m_scalingFactor;
     BUFFER_PTR(I_TYPE) m_inBuff;
 };
+
+#include "convertintegertofloating_impl.h"
 
 #endif // CONVERTINTEGERTOFLOATING_H
