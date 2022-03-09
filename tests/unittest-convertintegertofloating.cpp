@@ -13,16 +13,16 @@ TEST(TEST_CONVERT_INT16_TO_FLOAT, CONVERSION_DEFAULT_SCALE) {
                 calcIntegerInput,
                 10);
 
-    buffIntegerInput->at(0) = -std::numeric_limits<int16_t>::max();
-    buffIntegerInput->at(1) = std::numeric_limits<int16_t>::max();
-    buffIntegerInput->at(2) = 0;
+    buffIntegerInput->at(0) = 0;
+    buffIntegerInput->at(1) = -std::numeric_limits<int16_t>::max();
+    buffIntegerInput->at(2) = std::numeric_limits<int16_t>::max();
 
-    calcConvert->tryStartCalc(2);
+    calcConvert->tryStartCalc(3);
 
     BUFFER_PTR(float) buffFloatOutput = calcConvert->getOutputBuffer();
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 1.0);
 }
 
 TEST(TEST_CONVERT_INT16_TO_FLOAT, CONVERSION_SCALED_BY_ZERO) {
@@ -42,16 +42,16 @@ TEST(TEST_CONVERT_INT32_TO_FLOAT, CONVERSION_DEFAULT_SCALE) {
                 calcIntegerInput,
                 10);
 
-    buffIntegerInput->at(0) = -std::numeric_limits<int32_t>::max();
-    buffIntegerInput->at(1) = std::numeric_limits<int32_t>::max();
-    buffIntegerInput->at(2) = 0;
+    buffIntegerInput->at(0) = 0;
+    buffIntegerInput->at(1) = -std::numeric_limits<int32_t>::max();
+    buffIntegerInput->at(2) = std::numeric_limits<int32_t>::max();
 
-    calcConvert->tryStartCalc(2);
+    calcConvert->tryStartCalc(3);
 
     BUFFER_PTR(float) buffFloatOutput = calcConvert->getOutputBuffer();
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 1.0);
 }
 
 TEST(TEST_CONVERT_INT16_TO_DOUBLE, CONVERSION_DEFAULT_SCALE) {
@@ -62,16 +62,16 @@ TEST(TEST_CONVERT_INT16_TO_DOUBLE, CONVERSION_DEFAULT_SCALE) {
                 calcIntegerInput,
                 10);
 
-    buffIntegerInput->at(0) = -std::numeric_limits<int16_t>::max();
-    buffIntegerInput->at(1) = std::numeric_limits<int16_t>::max();
-    buffIntegerInput->at(2) = 0;
+    buffIntegerInput->at(0) = 0;
+    buffIntegerInput->at(1) = -std::numeric_limits<int16_t>::max();
+    buffIntegerInput->at(2) = std::numeric_limits<int16_t>::max();
 
-    calcConvert->tryStartCalc(2);
+    calcConvert->tryStartCalc(3);
 
     BUFFER_PTR(double) buffFloatOutput = calcConvert->getOutputBuffer();
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 1.0);
 }
 
 TEST(TEST_CONVERT_INT32_TO_DOUBLE, CONVERSION_DEFAULT_SCALE) {
@@ -82,14 +82,14 @@ TEST(TEST_CONVERT_INT32_TO_DOUBLE, CONVERSION_DEFAULT_SCALE) {
                 calcIntegerInput,
                 10);
 
-    buffIntegerInput->at(0) = -std::numeric_limits<int32_t>::max();
-    buffIntegerInput->at(1) = std::numeric_limits<int32_t>::max();
-    buffIntegerInput->at(2) = 0;
+    buffIntegerInput->at(0) = 0;
+    buffIntegerInput->at(1) = -std::numeric_limits<int32_t>::max();
+    buffIntegerInput->at(2) = std::numeric_limits<int32_t>::max();
 
-    calcConvert->tryStartCalc(2);
+    calcConvert->tryStartCalc(3);
 
     BUFFER_PTR(double) buffFloatOutput = calcConvert->getOutputBuffer();
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), -1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), 1.0);
-    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(0), 0.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(1), -1.0);
+    EXPECT_FLOAT_EQ(buffFloatOutput->at(2), 1.0);
 }
