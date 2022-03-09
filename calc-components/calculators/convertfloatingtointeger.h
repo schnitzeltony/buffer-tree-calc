@@ -18,13 +18,7 @@ public:
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<ConvertFloatingToInteger<F_TYPE, I_TYPE>> createWithOutBuffer(CALC_PTR(F_TYPE) floatIn, int bufferSize,
-                                                                                         I_TYPE scalingFactor = m_defaultScalingFactor)
-    {
-        return std::make_shared<ConvertFloatingToInteger<F_TYPE, I_TYPE>>(floatIn,
-                                                                std::make_shared<BufferTemplate<I_TYPE>>(bufferSize),
-                                                                createAccessStrategy<ACCESS_STRATEGY>(),
-                                                                scalingFactor);
-    }
+                                                                                         I_TYPE scalingFactor = m_defaultScalingFactor);
 
     static constexpr I_TYPE m_defaultScalingFactor = std::numeric_limits<I_TYPE>::max();
 
