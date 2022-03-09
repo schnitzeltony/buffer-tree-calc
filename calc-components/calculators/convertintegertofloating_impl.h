@@ -2,7 +2,7 @@
 #define CONVERTINTEGERTOFLOATING_IMPL_H
 
 #include "convertintegertofloating.h"
-
+#include <stdexcept>
 
 template <class I_TYPE, class F_TYPE>
 ConvertIntegerToFloating<I_TYPE, F_TYPE>::ConvertIntegerToFloating(CALC_PTR(I_TYPE) input,
@@ -13,7 +13,7 @@ ConvertIntegerToFloating<I_TYPE, F_TYPE>::ConvertIntegerToFloating(CALC_PTR(I_TY
     m_inBuff(input->getOutputBuffer())
 {
     if(!scalingFactor) {
-        throw division_by_zero_exception();
+        throw std::runtime_error("Math error: Attempted to divide by Zero\n");
     }
     m_scalingFactor = scalingFactor;
 }

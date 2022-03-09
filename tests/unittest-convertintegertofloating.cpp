@@ -31,7 +31,8 @@ TEST(TEST_CONVERT_INT16_TO_FLOAT, CONVERSION_SCALED_BY_ZERO) {
 
     BUFFER_PTR(float) buffFloatOutput = std::make_shared<BufferTemplate<float>>(10);
     AbstractAccessStrategy::Ptr accessStrategy = createAccessStrategy<SingleThreadedAccessStrategy>();
-    //ConvertIntegerToFloating<int16_t, float> calcConvert(calcIntegerInput, buffFloatOutput, accessStrategy, 0.0);
+    EXPECT_THROW((ConvertIntegerToFloating<int16_t, float>::createWithOutBuffer<SingleThreadedAccessStrategy>(calcIntegerInput, 10, 0.0)),
+                 std::runtime_error);
 }
 
 TEST(TEST_CONVERT_INT32_TO_FLOAT, CONVERSION_DEFAULT_SCALE) {
