@@ -37,9 +37,9 @@ std::shared_ptr<ConvertIntegerToFloating<I_TYPE, F_TYPE>> ConvertIntegerToFloati
                                                                                                                         F_TYPE scalingFactor)
 {
     return std::make_shared<ConvertIntegerToFloating<I_TYPE, F_TYPE>>(floatIn,
-                                                            std::make_shared<BufferTemplate<F_TYPE>>(bufferSize),
-                                                            createAccessStrategy<ACCESS_STRATEGY>(),
-                                                            scalingFactor);
+                                                                      std::make_shared<BufferTemplate<F_TYPE>>(bufferSize),
+                                                                      createAccessStrategy<ACCESS_STRATEGY>(),
+                                                                      scalingFactor);
 }
 
 #endif // CONVERTINTEGERTOFLOATING_IMPL_H
