@@ -1,7 +1,7 @@
 #ifndef CALCULATORMULT_IMPL_H
 #define CALCULATORMULT_IMPL_H
 
-#include "calculatormult.h"
+#include "calc-components/calculators/calculatormult.h"
 
 template <class T1_OUT, class T2>
 CalculatorMult2<T1_OUT, T2>::CalculatorMult2(CALC_PTR(T1_OUT) buff1,

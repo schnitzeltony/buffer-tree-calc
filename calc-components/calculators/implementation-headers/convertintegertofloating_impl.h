@@ -1,7 +1,7 @@
 #ifndef CONVERTINTEGERTOFLOATING_IMPL_H
 #define CONVERTINTEGERTOFLOATING_IMPL_H
 
-#include "convertintegertofloating.h"
+#include "calc-components/calculators/convertintegertofloating.h"
 #include <stdexcept>
 
 template <class I_TYPE, class F_TYPE>

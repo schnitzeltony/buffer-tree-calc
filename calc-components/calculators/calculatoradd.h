@@ -32,6 +32,6 @@ class CalculatorAdd : public CalculatorAdd2<T, T>
 {
 };
 
-#include "calculatoradd_impl.h"
+#include "implementation-headers/calculatoradd_impl.h"
 
 #endif // CALCULATORADD_H

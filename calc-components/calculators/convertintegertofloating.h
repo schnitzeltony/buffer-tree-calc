@@ -28,6 +28,6 @@ private:
     BUFFER_PTR(I_TYPE) m_inBuff;
 };
 
-#include "convertintegertofloating_impl.h"
+#include "implementation-headers/convertintegertofloating_impl.h"
 
 #endif // CONVERTINTEGERTOFLOATING_H

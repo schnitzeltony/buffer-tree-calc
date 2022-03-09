@@ -31,6 +31,6 @@ class CalculatorDiff : public CalculatorDiff2<T, T>
 {
 };
 
-#include "calculatordiff_impl.h"
+#include "implementation-headers/calculatordiff_impl.h"
 
 #endif // CALCULATORDIFF_H

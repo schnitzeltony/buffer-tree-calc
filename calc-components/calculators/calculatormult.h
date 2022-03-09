@@ -31,6 +31,6 @@ class CalculatorMult : public CalculatorMult2<T, T>
 {
 };
 
-#include "calculatormult_impl.h"
+#include "implementation-headers/calculatormult_impl.h"
 
 #endif // CALCULATORMULT_H
