@@ -13,7 +13,8 @@ public:
     virtual ~CalculatorFftwFloat();
     virtual void doCalc(int) override;
     template <typename ACCESS_STRATEGY>
-    static std::shared_ptr<CalculatorFftw> createWithOutBuffer(CALC_PTR(float) inReal, int bufferSize)
+    static std::shared_ptr<CalculatorFftw> createWithOutBuffer(CALC_PTR(float) inReal,
+                                                               int bufferSize)
     {
         return std::make_shared<CalculatorFftwFloat>(inReal,
                                                      std::make_shared<BufferTemplate<std::complex<float>>>(bufferSize),
