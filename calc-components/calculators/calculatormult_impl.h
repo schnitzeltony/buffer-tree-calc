@@ -3,25 +3,25 @@
 
 #include "calculatormult.h"
 
-template <class T>
-CalculatorMult<T>::CalculatorMult(CALC_PTR(T) buff1,
-                                 CALC_PTR(T) buff2,
-                                 BUFFER_PTR(T) output,
-                                 AbstractAccessStrategy::Ptr accessStrategy,
-                                 bool scalarBuff2) :
-    CalculatorBase<T>(std::vector<CalcInterface::Ptr> {buff1, buff2}, output, accessStrategy),
+template <class T1_OUT, class T2>
+CalculatorMult2<T1_OUT, T2>::CalculatorMult2(CALC_PTR(T1_OUT) buff1,
+                                            CALC_PTR(T2) buff2,
+                                            BUFFER_PTR(T1_OUT) output,
+                                            AbstractAccessStrategy::Ptr accessStrategy,
+                                            bool scalarBuff2) :
+    CalculatorBase<T1_OUT>(std::vector<CalcInterface::Ptr> {buff1, buff2}, output, accessStrategy),
     m_buff1(buff1->getOutputBuffer()),
     m_buff2(buff2->getOutputBuffer()),
     m_scalarBuff2(scalarBuff2)
 {
 }
 
-template <class T>
-void CalculatorMult<T>::doCalc(int sampleCount)
+template <class T1_OUT, class T2>
+void CalculatorMult2<T1_OUT, T2>::doCalc(int sampleCount)
 {
-    BUFFER_PTR(T) outBuff = CalculatorBase<T>::getOutputBuffer();
+    BUFFER_PTR(T1_OUT) outBuff = CalculatorBase<T1_OUT>::getOutputBuffer();
     if(!m_scalarBuff2) {
-        for(int i=0, currSample = CalculatorBase<T>::getSampleOffset();
+        for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
             i<sampleCount;
             ++i, ++currSample) {
             outBuff->at(currSample) =
@@ -29,7 +29,7 @@ void CalculatorMult<T>::doCalc(int sampleCount)
         }
     }
     else {
-        for(int i=0, currSample = CalculatorBase<T>::getSampleOffset();
+        for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
             i<sampleCount;
             ++i, ++currSample) {
             outBuff->at(currSample) =
