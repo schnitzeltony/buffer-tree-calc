@@ -93,3 +93,24 @@ TEST(TEST_DIFF_CALC, SCALAR_VALID_INT16) {
     EXPECT_EQ(buffMinuent->at(1) - buffSubtrahent->at(0), diffBuff->at(1));
 }
 
+TEST(TEST_DIFF_CALC, VALID_INT32_INT16) {
+    CALC_PTR(int32_t) calcMinuent = CalculatorNull<int32_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int32_t) buffMinuent = calcMinuent->getOutputBuffer();
+    CALC_PTR(int16_t) calcSubtrahent = CalculatorNull<int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(10);
+    BUFFER_PTR(int16_t) buffSubtrahent = calcSubtrahent->getOutputBuffer();
+
+    CALC_PTR(int32_t) calcDiff = CalculatorDiff2<int32_t, int16_t>::createWithOutBuffer<SingleThreadedAccessStrategy>(
+                calcMinuent,
+                calcSubtrahent,
+                10);
+
+    buffSubtrahent->at(0) = 10;
+    buffMinuent->at(0) = 5;
+    buffSubtrahent->at(1) = 8;
+    buffMinuent->at(1) = 4;
+    calcDiff->tryStartCalc(2);
+
+    BUFFER_PTR(int32_t) diffBuff = calcDiff->getOutputBuffer();
+    EXPECT_EQ(buffMinuent->at(0) - buffSubtrahent->at(0), diffBuff->at(0));
+    EXPECT_EQ(buffMinuent->at(1) - buffSubtrahent->at(1), diffBuff->at(1));
+}
