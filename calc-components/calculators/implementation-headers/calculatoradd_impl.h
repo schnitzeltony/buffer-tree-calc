@@ -1,7 +1,7 @@
 #ifndef CALCULATORADD_IMPL_H
 #define CALCULATORADD_IMPL_H
 
-#include "calculatoradd.h"
+#include "calc-components/calculators/calculatoradd.h"
 
 template <class T1_OUT, class T2>
 CalculatorAdd2<T1_OUT, T2>::CalculatorAdd2(CALC_PTR(T1_OUT) buff1,

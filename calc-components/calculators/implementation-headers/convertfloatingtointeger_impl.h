@@ -1,7 +1,7 @@
 #ifndef CONVERTFLOATINGTOINTEGER_IMPL_H
 #define CONVERTFLOATINGTOINTEGER_IMPL_H
 
-#include "convertfloatingtointeger.h"
+#include "calc-components/calculators/convertfloatingtointeger.h"
 
 template <class F_TYPE, class I_TYPE>
 ConvertFloatingToInteger<F_TYPE, I_TYPE>::ConvertFloatingToInteger(CALC_PTR(F_TYPE) input,

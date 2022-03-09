@@ -21,7 +21,7 @@ file(GLOB HEADERS
     buffers/*.h
     calc-components/*.h
     calc-components/calculators/*.h
-    calc-components/template-implementations/*.h
+    calc-components/calculators/implementation-headers/*.h
 )
 
 # install public headers

@@ -1,7 +1,7 @@
 #ifndef CALCULATORDIFF_IMPL_H
 #define CALCULATORDIFF_IMPL_H
 
-#include "calculatordiff.h"
+#include "calc-components/calculators/calculatordiff.h"
 
 template <class T1_OUT, class T2>
 CalculatorDiff2<T1_OUT, T2>::CalculatorDiff2(CALC_PTR(T1_OUT) minuent,
