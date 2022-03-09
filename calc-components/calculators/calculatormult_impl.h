@@ -38,4 +38,18 @@ void CalculatorMult2<T1_OUT, T2>::doCalc(int sampleCount)
     }
 }
 
+template <class T1_OUT, class T2>
+template <typename ACCESS_STRATEGY>
+std::shared_ptr<CalculatorMult2<T1_OUT, T2>> CalculatorMult2<T1_OUT, T2>::createWithOutBuffer(CALC_PTR(T1_OUT) buff1,
+                                                                                                     CALC_PTR(T2) buff2,
+                                                                                                     int bufferSize,
+                                                                                                     bool scalarBuff2)
+{
+    return std::make_shared<CalculatorMult2<T1_OUT, T2>>(buff1,
+                                                        buff2,
+                                                        std::make_shared<BufferTemplate<T1_OUT>>(bufferSize),
+                                                        createAccessStrategy<ACCESS_STRATEGY>(),
+                                                        scalarBuff2);
+}
+
 #endif // CALCULATORMULT_IMPL_H
