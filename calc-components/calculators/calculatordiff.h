@@ -21,6 +21,8 @@ public:
                                                                             int bufferSize,
                                                                             bool scalarSubtrahend = false);
 private:
+    void doCalcBuff(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
+    void doCalcScalar(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
     BUFFER_PTR(T1_OUT) m_minuentBuffer;
     BUFFER_PTR(T2) m_subtrahentBuffer;
     bool m_scalarSubtrahend;

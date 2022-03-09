@@ -21,21 +21,10 @@ void CalculatorDiff2<T1_OUT, T2>::doCalc(int sampleCount)
 {
     BUFFER_PTR(T1_OUT) outBuff = CalculatorBase<T1_OUT>::getOutputBuffer();
     if(!m_scalarSubtrahend) {
-        for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
-            i<sampleCount;
-            ++i, ++currSample) {
-            outBuff->at(currSample) =
-                    m_minuentBuffer->at(currSample) - m_subtrahentBuffer->at(currSample);
-        }
+        doCalcBuff(sampleCount, outBuff);
     }
     else {
-        T2 scalarSubtrahent = m_subtrahentBuffer->at(0);
-        for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
-            i<sampleCount;
-            ++i, ++currSample) {
-            outBuff->at(currSample) =
-                    m_minuentBuffer->at(currSample) - scalarSubtrahent;
-        }
+        doCalcScalar(sampleCount, outBuff);
     }
 }
 
@@ -51,6 +40,27 @@ std::shared_ptr<CalculatorDiff2<T1_OUT, T2>> CalculatorDiff2<T1_OUT, T2>::create
                                                          std::make_shared<BufferTemplate<T1_OUT>>(bufferSize),
                                                          createAccessStrategy<ACCESS_STRATEGY>(),
                                                          scalarSubtrahend);
+}
+
+template <class T1_OUT, class T2>
+void CalculatorDiff2<T1_OUT, T2>::doCalcBuff(int sampleCount, BUFFER_PTR(T1_OUT) outBuff)
+{
+    for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
+        i<sampleCount;
+        ++i, ++currSample) {
+        outBuff->at(currSample) = m_minuentBuffer->at(currSample) - m_subtrahentBuffer->at(currSample);
+    }
+}
+
+template <class T1_OUT, class T2>
+void CalculatorDiff2<T1_OUT, T2>::doCalcScalar(int sampleCount, BUFFER_PTR(T1_OUT) outBuff)
+{
+    T2 scalarSubtrahent = m_subtrahentBuffer->at(0);
+    for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
+        i<sampleCount;
+        ++i, ++currSample) {
+        outBuff->at(currSample) = m_minuentBuffer->at(currSample) - scalarSubtrahent;
+    }
 }
 
 #endif // CALCULATORDIFF_IMPL_H

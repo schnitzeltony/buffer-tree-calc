@@ -21,8 +21,7 @@ void ConvertFloatingToInteger<F_TYPE, I_TYPE>::doCalc(int sampleCount)
     for(int i=0, currSample = CalculatorBase<I_TYPE>::getSampleOffset();
             i<sampleCount;
             ++i, ++currSample) {
-        outBuff->at(currSample) =
-                (I_TYPE)((double)m_inBuff->at(currSample) * (double)m_scalingFactor);
+        outBuff->at(currSample) = (I_TYPE)((double)m_inBuff->at(currSample) * (double)m_scalingFactor);
     }
 }
 
