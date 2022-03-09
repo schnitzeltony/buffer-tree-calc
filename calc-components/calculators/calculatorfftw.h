@@ -3,28 +3,20 @@
 
 #include "calc-components/calculatorbase.h"
 #include "buffers/buffertemplate.h"
-
-#define CALC_PTR_FFTW(T) std::shared_ptr<CalculatorFftw<T>>
+#include <complex>
 
 template <class T>
-class CalculatorFftw : public CalculatorBase<T>
+class CalculatorFftw : public CalculatorBase<std::complex<T>>
 {
 public:
-    CalculatorFftw(CALC_PTR(T) in,
-                        BUFFER_PTR(T) out,
-                        AbstractAccessStrategy::Ptr accessStrategy,
-                        bool inverseFft) :
-        CalculatorBase<T>({in}, out, accessStrategy),
-        m_inBuffer(in->getOutputBuffer()),
-        m_inverseFft(inverseFft)
+    CalculatorFftw(CALC_PTR(T) inReal,
+                   BUFFER_PTR(std::complex<T>) outFft,
+                   AbstractAccessStrategy::Ptr accessStrategy) :
+        CalculatorBase<std::complex<T>>({inReal}, outFft, accessStrategy),
+        m_inBuff(inReal->getOutputBuffer())
     {}
-    T getFftRe(int order) { return getFftVal(order*2); }
-    T getFftIm(int order) { return getFftVal(order*2+1); }
 protected:
-    BUFFER_PTR(T) m_inBuffer;
-    bool m_inverseFft;
-private:
-    T getFftVal(int idx) { return !m_inverseFft ? CalculatorBase<T>::m_outputBuffer->at(idx) : m_inBuffer->at(idx); }
+    BUFFER_PTR(T) m_inBuff;
 };
 
 #endif // CALCULATORFFTW_H

@@ -5,8 +5,8 @@
 
 template <class T>
 CalculatorBase<T>::CalculatorBase(std::vector<CalcInterface::Ptr> inputCalculators,
-               BUFFER_PTR(T) outputBuffer,
-               AbstractAccessStrategy::Ptr accessStrategy) :
+                                  BUFFER_PTR(T) outputBuffer,
+                                  AbstractAccessStrategy::Ptr accessStrategy) :
     m_AccessComponent([&](int sampleCount){doCalcCallback(sampleCount);}, accessStrategy),
     m_inputsComposite(inputCalculators),
     m_outputBuffer(outputBuffer)
