@@ -5,6 +5,15 @@
 #include "calc-components/calculatorbase.h"
 #include <memory>
 #include <limits>
+#include <exception>
+
+class division_by_zero_exception : public std::exception
+{
+    virtual const char* what() const throw() override
+    {
+        return "division by zero";
+    }
+};
 
 template <class I_TYPE, class F_TYPE>
 class ConvertIntegerToFloating : public CalculatorBase<F_TYPE>
