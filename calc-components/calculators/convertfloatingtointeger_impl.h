@@ -5,9 +5,9 @@
 
 template <class F_TYPE, class I_TYPE>
 ConvertFloatingToInteger<F_TYPE, I_TYPE>::ConvertFloatingToInteger(CALC_PTR(F_TYPE) input,
-                                                                BUFFER_PTR(I_TYPE) output,
-                                                                AbstractAccessStrategy::Ptr accessStrategy,
-                                                                I_TYPE scalingFactor) :
+                                                                   BUFFER_PTR(I_TYPE) output,
+                                                                   AbstractAccessStrategy::Ptr accessStrategy,
+                                                                   I_TYPE scalingFactor) :
     CalculatorBase<I_TYPE>(std::vector<CalcInterface::Ptr> {input}, output, accessStrategy),
     m_scalingFactor(scalingFactor),
     m_inBuff(input->getOutputBuffer())
@@ -33,9 +33,9 @@ std::shared_ptr<ConvertFloatingToInteger<F_TYPE, I_TYPE>> ConvertFloatingToInteg
                                                                                                                         I_TYPE scalingFactor)
 {
     return std::make_shared<ConvertFloatingToInteger<F_TYPE, I_TYPE>>(floatIn,
-                                                            std::make_shared<BufferTemplate<I_TYPE>>(bufferSize),
-                                                            createAccessStrategy<ACCESS_STRATEGY>(),
-                                                            scalingFactor);
+                                                                      std::make_shared<BufferTemplate<I_TYPE>>(bufferSize),
+                                                                      createAccessStrategy<ACCESS_STRATEGY>(),
+                                                                      scalingFactor);
 }
 
 #endif // CONVERTFLOATINGTOINTEGER_IMPL_H
