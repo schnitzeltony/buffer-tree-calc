@@ -21,21 +21,10 @@ void CalculatorAdd2<T1_OUT, T2>::doCalc(int sampleCount)
 {
     BUFFER_PTR(T1_OUT) outBuff = CalculatorBase<T1_OUT>::getOutputBuffer();
     if(!m_scalarBuff2) {
-        for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
-            i<sampleCount;
-            ++i, ++currSample) {
-            outBuff->at(currSample) =
-                    m_buff1->at(currSample) + m_buff2->at(currSample);
-        }
+        doCalcBuff(sampleCount, outBuff);
     }
     else {
-        T2 scalarVal = m_buff2->at(0);
-        for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
-            i<sampleCount;
-            ++i, ++currSample) {
-            outBuff->at(currSample) =
-                    m_buff1->at(currSample) + scalarVal;
-        }
+        doCalcScalar(sampleCount, outBuff);
     }
 }
 
@@ -51,6 +40,27 @@ std::shared_ptr<CalculatorAdd2<T1_OUT, T2>> CalculatorAdd2<T1_OUT, T2>::createWi
                                                        std::make_shared<BufferTemplate<T1_OUT>>(bufferSize),
                                                        createAccessStrategy<ACCESS_STRATEGY>(),
                                                        scalarBuff2);
+}
+
+template <class T1_OUT, class T2>
+void CalculatorAdd2<T1_OUT, T2>::doCalcBuff(int sampleCount, BUFFER_PTR(T1_OUT) outBuff)
+{
+    for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
+        i<sampleCount;
+        ++i, ++currSample) {
+        outBuff->at(currSample) = m_buff1->at(currSample) + m_buff2->at(currSample);
+    }
+}
+
+template <class T1_OUT, class T2>
+void CalculatorAdd2<T1_OUT, T2>::doCalcScalar(int sampleCount, BUFFER_PTR(T1_OUT) outBuff)
+{
+    T2 scalarVal = m_buff2->at(0);
+    for(int i=0, currSample = CalculatorBase<T1_OUT>::getSampleOffset();
+        i<sampleCount;
+        ++i, ++currSample) {
+        outBuff->at(currSample) = m_buff1->at(currSample) + scalarVal;
+    }
 }
 
 #endif // CALCULATORADD_IMPL_H

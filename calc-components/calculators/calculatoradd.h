@@ -22,6 +22,8 @@ public:
             int bufferSize, bool
             scalarBuff2 = false);
 private:
+    void doCalcBuff(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
+    void doCalcScalar(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
     BUFFER_PTR(T1_OUT) m_buff1;
     BUFFER_PTR(T2) m_buff2;
     bool m_scalarBuff2;
