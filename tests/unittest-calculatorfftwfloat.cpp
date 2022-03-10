@@ -65,12 +65,12 @@ TEST(TEST_FFT_FLOAT, FFT_CONVERSION_AND_INVERS) {
     CALC_PTR(float) calcNormal = CalculatorNull<float>::createWithOutBuffer<SingleThreadedAccessStrategy>(1);
     calcNormal->getOutputBuffer()->at(0) = 1/float(buffSize);
 
-    CALC_PTR(std::complex<float>) fftCalcNormalised = std::make_shared<CalculatorMult2<std::complex<float>, float>>(
-        fftCalc,
-        calcNormal,
-        std::make_shared<BufferTemplate<std::complex<float>>>(buffSize),
-        createAccessStrategy<SingleThreadedAccessStrategy>(),
-        true);
+    CALC_PTR(std::complex<float>) fftCalcNormalised =
+            CalculatorMult2<std::complex<float>, float>::createWithOutBuffer<SingleThreadedAccessStrategy>(
+                fftCalc,
+                calcNormal,
+                buffSize,
+                true);
 
     CALC_PTR(float) fftCalcInvers = CalculatorFftwInvFloat::createWithOutBuffer<SingleThreadedAccessStrategy>(fftCalcNormalised, buffSize);
     fftCalcInvers->tryStartCalc(buffSize);
