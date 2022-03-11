@@ -5,6 +5,7 @@
 #include "calccomposite.h"
 #include "buffers/buffertemplate.h"
 #include <vector>
+#include <functional>
 
 #define CALC_PTR(T) std::shared_ptr<CalculatorBase<T>>
 
@@ -15,6 +16,7 @@ class CalculatorBase : public CalcInterface
 public:
     CalculatorBase(std::vector<CalcInterface::Ptr> inputCalculators,
                    BUFFER_PTR(T) outputBuffer,
+                   std::function<void(int)> doCalcHandler,
                    AbstractAccessStrategy::Ptr accessStrategy);
     virtual void prepareNextCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
@@ -33,6 +35,7 @@ private:
     void doCalcCallback(int sampleCount);
     CalcComponent m_AccessComponent;
     CalcComposite m_inputsComposite;
+    std::function<void(int)> m_doCalcHandler = nullptr;
     int m_sampleOffset = 0;
     bool m_keepSampleOffsetOnNextTryStart = false;
 };

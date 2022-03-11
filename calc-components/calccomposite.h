@@ -12,8 +12,6 @@ public:
     virtual void prepareNextCalc() override final;
     virtual bool tryStartCalc(int sampleCount) override final;
     virtual bool isDone() const override final;
-protected:
-    virtual void doCalc(int sampleCount) override final;
 private:
     std::vector<Ptr> m_components;
 };

@@ -13,7 +13,6 @@ public:
                    BUFFER_PTR(T1_OUT) output,
                    AbstractAccessStrategy::Ptr accessStrategy,
                    bool scalarBuff2 = false);
-    virtual void doCalc(int sampleCount) override;
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<CalculatorAdd2<T1_OUT, T2>> createWithOutBuffer(
@@ -22,6 +21,7 @@ public:
             int bufferSize, bool
             scalarBuff2 = false);
 private:
+    void doCalc(int sampleCount);
     void doCalcBuff(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
     void doCalcScalar(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
     BUFFER_PTR(T1_OUT) m_buff1;

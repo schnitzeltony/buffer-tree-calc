@@ -3,7 +3,11 @@
 CalculatorFftwInvFloat::CalculatorFftwInvFloat(CALC_PTR(std::complex<float>) inFft,
                                                BUFFER_PTR(float) outReal,
                                                AbstractAccessStrategy::Ptr accessStrategy) :
-    CalculatorFftwInv<float>({inFft}, outReal, accessStrategy)
+    CalculatorFftwInv<float>(
+        {inFft},
+        outReal,
+        [&](int sampleCount){doCalc(sampleCount);},
+        accessStrategy)
 {
     // we work with bare pointers -> check
     if(m_outputBuffer->size() < inFft->getOutputBuffer()->size()) {

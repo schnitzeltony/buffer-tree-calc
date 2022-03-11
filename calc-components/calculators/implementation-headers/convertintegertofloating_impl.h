@@ -9,7 +9,11 @@ ConvertIntegerToFloating<I_TYPE, F_TYPE>::ConvertIntegerToFloating(CALC_PTR(I_TY
                                                                    BUFFER_PTR(F_TYPE) output,
                                                                    AbstractAccessStrategy::Ptr accessStrategy,
                                                                    F_TYPE scalingFactor) :
-    CalculatorBase<F_TYPE>(std::vector<CalcInterface::Ptr> {input}, output, accessStrategy),
+    CalculatorBase<F_TYPE>(
+        std::vector<CalcInterface::Ptr> {input},
+        output,
+        [&](int sampleCount){doCalc(sampleCount);},
+        accessStrategy),
     m_inBuff(input->getOutputBuffer())
 {
     if(!scalingFactor) {

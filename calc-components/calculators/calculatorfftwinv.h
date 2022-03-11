@@ -11,8 +11,9 @@ class CalculatorFftwInv : public CalculatorBase<T>
 public:
     CalculatorFftwInv(CALC_PTR(std::complex<T>) inFft,
                       BUFFER_PTR(T) outReal,
+                      std::function<void(int)> doCalcHandler,
                       AbstractAccessStrategy::Ptr accessStrategy) :
-        CalculatorBase<T>({inFft}, outReal, accessStrategy),
+        CalculatorBase<T>({inFft}, outReal, doCalcHandler, accessStrategy),
         m_inBuff(inFft->getOutputBuffer())
     {}
 protected:

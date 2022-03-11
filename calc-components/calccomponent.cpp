@@ -15,7 +15,7 @@ bool CalcComponent::tryStartCalc(int sampleCount)
 {
     bool calcDoneByMe = m_accessStrategy->tryMakeBusy();
     if(calcDoneByMe) {
-        doCalc(sampleCount);
+        m_doCalcHandler(sampleCount);
         m_accessStrategy->setDone();
     }
     return calcDoneByMe;
@@ -24,9 +24,4 @@ bool CalcComponent::tryStartCalc(int sampleCount)
 bool CalcComponent::isDone() const
 {
     return m_accessStrategy->isDone();
-}
-
-void CalcComponent::doCalc(int sampleCount)
-{
-    m_doCalcHandler(sampleCount);
 }

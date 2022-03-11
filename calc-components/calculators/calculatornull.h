@@ -11,9 +11,8 @@ class CalculatorNull : public CalculatorBase<T>
 public:
     CalculatorNull(BUFFER_PTR(T) output,
                    AbstractAccessStrategy::Ptr accessStrategy) :
-        CalculatorBase<T>(std::vector<CalcInterface::Ptr> {}, output, accessStrategy)
+        CalculatorBase<T>(std::vector<CalcInterface::Ptr> {}, output, [&](int){ }, accessStrategy)
     {}
-    virtual void doCalc(int) override { }
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<CalculatorNull<T>> createWithOutBuffer(int bufferSize)

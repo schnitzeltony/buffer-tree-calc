@@ -14,7 +14,6 @@ public:
                              BUFFER_PTR(F_TYPE) output,
                              AbstractAccessStrategy::Ptr accessStrategy,
                              F_TYPE scalingFactor = m_defaultScalingFactor);
-    virtual void doCalc(int sampleCount) override;
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<ConvertIntegerToFloating<I_TYPE, F_TYPE>> createWithOutBuffer(CALC_PTR(I_TYPE) floatIn, int bufferSize,
@@ -23,6 +22,7 @@ public:
     static constexpr F_TYPE m_defaultScalingFactor = (F_TYPE)std::numeric_limits<I_TYPE>::max();
 
 private:
+    void doCalc(int sampleCount);
     F_TYPE m_scalingFactor;
     BUFFER_PTR(I_TYPE) m_inBuff;
 };
