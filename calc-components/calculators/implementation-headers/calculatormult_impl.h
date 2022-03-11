@@ -9,7 +9,11 @@ CalculatorMult2<T1_OUT, T2>::CalculatorMult2(CALC_PTR(T1_OUT) inCalc1,
                                              BUFFER_PTR(T1_OUT) output,
                                              AbstractAccessStrategy::Ptr accessStrategy,
                                              bool scalarBuff2) :
-    CalculatorBase<T1_OUT>(std::vector<CalcInterface::Ptr> {inCalc1, inCalc2}, output, accessStrategy),
+    CalculatorBase<T1_OUT>(
+        std::vector<CalcInterface::Ptr> {inCalc1, inCalc2},
+        output,
+        [&](int sampleCount){doCalc(sampleCount);},
+        accessStrategy),
     m_buff1(inCalc1->getOutputBuffer()),
     m_buff2(inCalc2->getOutputBuffer()),
     m_scalarBuff2(scalarBuff2)

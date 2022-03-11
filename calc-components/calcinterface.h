@@ -2,6 +2,7 @@
 #define CALCINTERFACE_H
 
 #include <memory>
+#include <functional>
 
 class CalcInterface
 {
@@ -11,8 +12,6 @@ public:
     virtual void prepareNextCalc() = 0;
     virtual bool tryStartCalc(int sampleCount) = 0;
     virtual bool isDone() const = 0;
-protected:
-    virtual void doCalc(int sampleCount) = 0;
 };
 
 #endif // CALCINTERFACE_H

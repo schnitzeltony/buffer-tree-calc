@@ -13,7 +13,6 @@ public:
                     BUFFER_PTR(T1_OUT) output,
                     AbstractAccessStrategy::Ptr accessStrategy,
                     bool scalarSubtrahend = false);
-    virtual void doCalc(int sampleCount) override;
 
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<CalculatorDiff2<T1_OUT, T2>> createWithOutBuffer(CALC_PTR(T1_OUT) minuent,
@@ -21,6 +20,7 @@ public:
                                                                             int bufferSize,
                                                                             bool scalarSubtrahend = false);
 private:
+    void doCalc(int sampleCount);
     void doCalcBuff(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
     void doCalcScalar(int sampleCount, BUFFER_PTR(T1_OUT) outBuff);
     BUFFER_PTR(T1_OUT) m_minuentBuffer;

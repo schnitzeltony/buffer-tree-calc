@@ -5,10 +5,6 @@ CalcComposite::CalcComposite(std::vector<Ptr> components) :
 {
 }
 
-void CalcComposite::doCalc(int)
-{
-}
-
 void CalcComposite::prepareNextCalc()
 {
     for(auto component : m_components) {

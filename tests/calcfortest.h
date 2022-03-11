@@ -11,18 +11,13 @@ public:
     CalcForTest(CALC_PTR(T) in,
                 BUFFER_PTR(T) out,
                 AbstractAccessStrategy::Ptr accessStrategy) :
-        CalculatorBase<T>(std::vector<CalcInterface::Ptr> {in}, out, accessStrategy),
+        CalculatorBase<T>(
+            std::vector<CalcInterface::Ptr> {in},
+            out,
+            [&](int sampleCount){doCalc(sampleCount);},
+            accessStrategy),
         m_inBuffer(in->getOutputBuffer())
     {}
-    virtual void doCalc(int sampleCount) override
-    {
-        BUFFER_PTR(T) outBuff = CalculatorBase<T>::getOutputBuffer();
-        for(int i=0, currSample = CalculatorBase<T>::getSampleOffset();
-            i<sampleCount;
-            ++i, ++currSample) {
-            outBuff->at(currSample) = m_inBuffer->at(currSample);
-        }
-    };
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<CalcForTest<T>> createWithOutBuffer(CALC_PTR(T) in, int bufferSize)
     {
@@ -31,6 +26,15 @@ public:
                                                 createAccessStrategy<ACCESS_STRATEGY>());
     }
 private:
+    void doCalc(int sampleCount)
+    {
+        BUFFER_PTR(T) outBuff = CalculatorBase<T>::getOutputBuffer();
+        for(int i=0, currSample = CalculatorBase<T>::getSampleOffset();
+            i<sampleCount;
+            ++i, ++currSample) {
+            outBuff->at(currSample) = m_inBuffer->at(currSample);
+        }
+    };
     BUFFER_PTR(T) m_inBuffer;
 };
 

@@ -11,7 +11,6 @@ public:
                            BUFFER_PTR(float) outReal,
                            AbstractAccessStrategy::Ptr accessStrategy);
     virtual ~CalculatorFftwInvFloat();
-    virtual void doCalc(int) override;
     template <typename ACCESS_STRATEGY>
     static std::shared_ptr<CalculatorFftwInv> createWithOutBuffer(CALC_PTR(std::complex<float>) inFft, int bufferSize)
     {
@@ -20,6 +19,7 @@ public:
                                                         createAccessStrategy<ACCESS_STRATEGY>());
     }
 private:
+    void doCalc(int);
     fftwf_plan m_fftwPlan = nullptr;
 };
 

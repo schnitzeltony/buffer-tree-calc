@@ -6,10 +6,12 @@
 template <class T>
 CalculatorBase<T>::CalculatorBase(std::vector<CalcInterface::Ptr> inputCalculators,
                                   BUFFER_PTR(T) outputBuffer,
+                                  std::function<void(int)> doCalcHandler,
                                   AbstractAccessStrategy::Ptr accessStrategy) :
     m_AccessComponent([&](int sampleCount){doCalcCallback(sampleCount);}, accessStrategy),
     m_inputsComposite(inputCalculators),
-    m_outputBuffer(outputBuffer)
+    m_outputBuffer(outputBuffer),
+    m_doCalcHandler(doCalcHandler)
 {
 }
 
@@ -45,7 +47,7 @@ bool CalculatorBase<T>::tryStartCalc(int sampleCount)
 template <class T>
 void CalculatorBase<T>::doCalcCallback(int sampleCount)
 {
-    doCalc(sampleCount);
+    m_doCalcHandler(sampleCount);
     m_sampleOffset += sampleCount;
 }
 

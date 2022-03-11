@@ -9,7 +9,11 @@ CalculatorDiff2<T1_OUT, T2>::CalculatorDiff2(CALC_PTR(T1_OUT) minuent,
                                              BUFFER_PTR(T1_OUT) output,
                                              AbstractAccessStrategy::Ptr accessStrategy,
                                              bool scalarSubtrahend) :
-    CalculatorBase<T1_OUT>(std::vector<CalcInterface::Ptr> {minuent, subtrahent}, output, accessStrategy),
+    CalculatorBase<T1_OUT>(
+        std::vector<CalcInterface::Ptr> {minuent, subtrahent},
+        output,
+        [&](int sampleCount){doCalc(sampleCount);},
+        accessStrategy),
     m_minuentBuffer(minuent->getOutputBuffer()),
     m_subtrahentBuffer(subtrahent->getOutputBuffer()),
     m_scalarSubtrahend(scalarSubtrahend)
